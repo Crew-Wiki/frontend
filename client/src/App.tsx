@@ -1,28 +1,9 @@
-import React, { useRef } from 'react';
-import WikiHeader from '@components/WikiHeader';
-import WikiMain from '@components/WikiMain';
+import React from 'react';
+import Router from './Router';
 
-import '@toast-ui/editor/dist/toastui-editor.css';
-import TuiEditor from './components/markdownEditor/TuiEditor';
-
-type HookCallback = (url: string, text?: string) => void;
-
-function App() {
-  const editorRef = useRef(null);
-  const imageHandler = async (blob: File | Blob, callback: HookCallback) => {
-    console.log(blob);
-    callback(
-      'https://www.seouldanurim.net/comm/getImage?srvcId=MEDIA&parentSn=54786&fileTy=MEDIA&fileNo=1&thumbTy=L',
-      '공원',
-    );
-  };
-  return (
-    <div className="App bg-grayscale-50">
-      <WikiHeader />
-      <TuiEditor content="" editorRef={editorRef} imageHandler={imageHandler} />
-      <WikiMain />
-    </div>
-  );
-}
+const App = () => {
+  // 앱 전반적으로 처리해야할 일 작성
+  return <Router />;
+};
 
 export default App;
