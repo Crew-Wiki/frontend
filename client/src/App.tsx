@@ -1,12 +1,14 @@
 import React from 'react';
-import Button from '@components/Button';
-import { Editor } from '@toast-ui/react-editor';
+import WikiHeader from '@components/WikiHeader';
+import WikiMain from '@components/WikiMain';
+
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 function App() {
   return (
-    <div className="App">
-      <div className="text-3xl font-bold bg-black">안녕하세요</div>
+    <div className="App bg-grayscale-50">
+      <WikiHeader />
+      {/* <div className="bg-">안녕하세요</div>
       <Editor
         initialValue="hello react editor world!"
         previewStyle="vertical"
@@ -14,7 +16,8 @@ function App() {
         initialEditType="wysiwyg"
         useCommandShortcut={false}
       />
-      <Button />
+      <Button /> */}
+      <WikiMain />
     </div>
   );
 }
