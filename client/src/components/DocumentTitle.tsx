@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DocumentTitle = () => {
+const DocumentTitle = (props: { title: string }) => {
   return (
     <>
-      <h1 className="font-bm text-3xl text-greyscale-800">제목</h1>
+      <h1 className="font-bm text-3xl text-greyscale-800">{props.title}</h1>
     </>
   );
 };
