@@ -12,4 +12,11 @@ axiosInstance.interceptors.request.use(async (config) => {
   return config;
 });
 
+axiosInstance.interceptors.response.use(
+  (success) => success,
+  async (error) => {
+    alert(error.message);
+  },
+);
+
 export default axiosInstance;
