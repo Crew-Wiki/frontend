@@ -10,7 +10,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const Button = ({ size, type, style, text, disabled }: ButtonProps) => {
+const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => {
   const BUTTONSIZE = {
     xs: 'h-9 rounded-[1.125rem] px-3',
     s: 'h-11 rounded-[1.375rem] px-4',
@@ -27,6 +27,7 @@ const Button = ({ size, type, style, text, disabled }: ButtonProps) => {
       type={type}
       className={twMerge('font-bm text-sm', BUTTONSIZE[size], BUTTONSTYLE[style])}
       disabled={disabled}
+      onClick={onClick}
     >
       {text}
     </button>

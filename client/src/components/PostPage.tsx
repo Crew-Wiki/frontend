@@ -12,12 +12,14 @@ const PostPage = () => {
   const onClick = () => {
     if (editorRef === null) return;
     const editorInstance = editorRef.current?.getInstance();
+    editorInstance?.getEditorElements().mdEditor.querySelector('img')?.setAttribute('src', 'sdfsd');
     const contentMark = editorInstance?.getMarkdown();
     const context = {
-      title: '켈리(6기)',
+      title: '대문',
       contents: contentMark ?? '',
       writer: '켈리',
     };
+
     writeDocument(context);
   };
 
