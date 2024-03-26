@@ -14,18 +14,16 @@ const toolbar = [['heading', 'bold', 'italic', 'strike'], ['hr', 'quote', 'ul', 
 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
   return (
-    <>
-      <Editor
-        initialValue={content ?? ' '}
-        initialEditType="wysiwyg"
-        autofocus={false}
-        ref={editorRef}
-        toolbarItems={toolbar}
-        hideModeSwitch
-        height="500px"
-        hooks={{ addImageBlobHook: imageHandler }}
-      />
-    </>
+    <Editor
+      initialValue={content ?? ' '}
+      initialEditType="wysiwyg"
+      autofocus={false}
+      ref={editorRef}
+      toolbarItems={toolbar}
+      hideModeSwitch
+      height="500px"
+      hooks={{ addImageBlobHook: imageHandler }}
+    />
   );
 }
 
