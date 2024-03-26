@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import URLS from './constants/urls';
 import DocumentPage from './components/DocumentPage';
-import DocumentWrite from './components/DocumentWrite';
+import PostPage from './components/PostPage';
 
 const Router = () => {
   return (
@@ -11,7 +11,7 @@ const Router = () => {
       <Route element={<Layout />}>
         {/* main */}
         <Route path={URLS.MAIN} element={<DocumentPage />} />
-        <Route path={URLS.POST} element={<DocumentWrite />} />
+        <Route path={URLS.POST} element={<PostPage />} />
       </Route>
     </Routes>
   );

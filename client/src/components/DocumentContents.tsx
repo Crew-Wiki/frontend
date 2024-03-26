@@ -65,7 +65,7 @@ const TEXT = `
 `;
 
 const DocumentContents = () => {
-	return <Viewer initialValue={TEXT}></Viewer>;
+  return <Viewer initialValue={TEXT}></Viewer>;
 };
 
 export default DocumentContents;

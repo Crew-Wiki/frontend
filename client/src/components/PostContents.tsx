@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import TuiEditor from "./markdownEditor/TuiEditor";
+import { Editor } from '@toast-ui/react-editor';
+import TuiEditor from './markdownEditor/TuiEditor';
 
 type HookCallback = (url: string, text?: string) => void;
 
-const PostContents = () => {
+interface PostContentProps {
+  editorRef: React.MutableRefObject<Editor | null>;
+}
 
+const PostContents = ({ editorRef }: PostContentProps) => {
   const imageHandler = async (blob: File | Blob, callback: HookCallback) => {
     console.log(blob);
     callback(
@@ -13,9 +17,10 @@ const PostContents = () => {
       '공원',
     );
   };
+
   return (
     // 기본 content 어떻게 주어줄 지
-    <TuiEditor content="" editorRef={null} imageHandler={imageHandler} />
+    <TuiEditor content="" editorRef={editorRef} imageHandler={imageHandler} />
   );
 };
 
