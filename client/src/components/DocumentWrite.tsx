@@ -30,6 +30,7 @@ const DocumentWrite = () => {
   return (
     <div className="App bg-grayscale-50">
       <TuiEditor content="" editorRef={editorRef} imageHandler={imageHandler} />
+      <button onClick={onSubmit}>전송</button>
     </div>
   );
 };
