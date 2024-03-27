@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import axiosInstance from '@/utils/axios';
-import ENDPOINT from '@/constants/endpoint';
+import axiosInstance from '@utils/axios';
+import ENDPOINT from '@constants/endpoint';
 
 const { GET_DOCUMENT_BY_TITLE } = ENDPOINT;
 

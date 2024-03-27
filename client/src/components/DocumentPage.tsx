@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
 import DocumentHeader from './DocumentHeader';
 import DocumentContents from './DocumentContents';
+import DocumentFooter from './DocumentFooter';
 
 interface DocumentPageProps {
   daemoon?: string;
@@ -26,6 +27,7 @@ const DocumentPage = ({ daemoon }: DocumentPageProps) => {
         <DocumentHeader title={docs.title} />
         <DocumentContents contents={docs.contents} />
       </div>
+      <DocumentFooter generateTime={docs.generateTime} />
     </Suspense>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import WikiHeader from '../WikiHeader';
-import DocumentFooter from '../DocumentFooter';
 import RecentlyEdit from '../RecentlyEdit';
 
 const Layout = () => {
@@ -12,7 +11,6 @@ const Layout = () => {
         <main className="flex gap-6 py-6 px-4 max-w-[1440px] w-full">
           <div className="flex flex-col gap-6 w-full">
             <Outlet />
-            <DocumentFooter />
           </div>
           <RecentlyEdit />
         </main>
