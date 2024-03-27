@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosInstance from '@/utils/axios';
-import ENDPOINT from '@/constants/endpoint';
-import KEYS from '@/constants/keys';
+import axiosInstance from '@utils/axios';
+import ENDPOINT from '@constants/endpoint';
+import KEYS from '@constants/keys';
 
 const { POST_DOCUMENT } = ENDPOINT;
 const { QUERY } = KEYS;
 
 // 요청할 때 필요한 데이터
-interface PostDocumentContent {
+export interface PostDocumentContent {
   title: string;
   contents: string;
   writer: string;

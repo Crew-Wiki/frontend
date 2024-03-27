@@ -1,5 +1,4 @@
 import React from 'react';
-import DocumentPage from './DocumentPage';
 import RecentlyEdit from './RecentlyEdit';
 import DocumentFooter from './DocumentFooter';
 import PostPage from './PostPage';

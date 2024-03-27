@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useGetDocumentByTitle from '@/api/get/useGetDocumentByTitle';
+import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
 import DocumentHeader from './DocumentHeader';
 import DocumentContents from './DocumentContents';
 
