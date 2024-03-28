@@ -14,7 +14,7 @@ const RecentlyEdit = () => {
       {recentlyDocuments.documents.map((document) => {
         return (
           <Link
-            key={document.logId}
+            key={`recently-${document.logId}`}
             className="px-2.5 py-2 font-pretendard font-normal text-xs border-b border-grayscale-100 last:border-0"
             to={`${URLS.WIKI}/${document.title}`}
             target="_blank_"
