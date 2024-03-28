@@ -1,7 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '@/utils/axios';
 import ENDPOINT from '@/constants/endpoint';
 import KEYS from '@/constants/keys';
-import { useMutation } from '@tanstack/react-query';
 
 const { POST_DOCUMENT } = ENDPOINT;
 const { QUERY } = KEYS;
@@ -29,12 +29,8 @@ interface PostDocumentResponse {
 }
 
 const usePostDocument = () => {
-  const writeDocument = async ({ title, contents, writer }: PostDocumentContent) => {
-    const body = { contents, writer };
-    const response = await axiosInstance.post<PostDocumentRequest, PostDocumentResponse>(
-      `${POST_DOCUMENT}/${title}`,
-      body,
-    );
+  const writeDocument = async (body: PostDocumentContent) => {
+    const response = await axiosInstance.post<PostDocumentContent, PostDocumentResponse>(`${POST_DOCUMENT}`, body);
     return response;
   };
 

@@ -2,10 +2,14 @@ import React from 'react';
 import DocumentTitle from './DocumentTitle';
 import Button from './Button';
 
-const DocumentHeader = () => {
+interface DocumentHeaderProps {
+  title: string;
+}
+
+const DocumentHeader = ({ title }: DocumentHeaderProps) => {
   return (
     <header className="flex justify-between w-full">
-      <DocumentTitle title="문서제목" />
+      <DocumentTitle title={title} />
       <fieldset className="flex gap-2">
         <Button style="tertiary" size="xs" text="새로고침" />
         <Button style="tertiary" size="xs" text="편집하기" />
