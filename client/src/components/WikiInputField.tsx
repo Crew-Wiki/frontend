@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { ReactComponent as SearchCircle } from '@assets/image/search-circle-secondary.svg';
 import useInput from '@hooks/useInput';
@@ -5,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
 
 const WikiInputField = () => {
-  const [value, onChange] = useInput<string>('');
+  const [value, setValue] = useInput<string>('');
   const navigate = useNavigate();
 
   const onSubmit = () => {
-    if (value.trim() === '') return;
-    navigate(`${URLS.WIKI}/${value}`);
+    value.trim() === '' ? navigate('/') : navigate(`${URLS.WIKI}/${value}`);
+    setValue('');
   };
 
   return (
@@ -22,7 +23,7 @@ const WikiInputField = () => {
         className="w-full outline-none font-pretendard text-base font-normal text-grayscale-800 placeholder:text-grayscale-lightText"
         placeholder="검색할 문서의 제목을 입력하세요."
         value={value}
-        onChange={onChange}
+        onChange={setValue}
       />
       <button>
         <SearchCircle className="cursor-pointer" />
