@@ -8,7 +8,7 @@ const RecentlyEdit = () => {
   const { recentlyDocuments } = useGetRecentlyDocuments();
 
   return (
-    <aside className="flex flex-col w-60 h-fit bg-white border-primary-100 border-solid border rounded-xl">
+    <aside className="max-[1024px]:hidden flex flex-col w-60 h-fit bg-white border-primary-100 border-solid border rounded-xl">
       <h2 className="flex justify-center items-center w-full h-12 font-pretendard font-bold text-lg border-b border-primary-100">
         최근 편집
       </h2>
