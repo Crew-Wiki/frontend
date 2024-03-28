@@ -7,9 +7,10 @@ type HookCallback = (url: string, text?: string) => void;
 
 interface PostContentProps {
   editorRef: React.MutableRefObject<Editor | null>;
+  initialValue?: string;
 }
 
-const PostContents = ({ editorRef }: PostContentProps) => {
+const PostContents = ({ editorRef, initialValue }: PostContentProps) => {
   const imageHandler = async (blob: File | Blob, callback: HookCallback) => {
     console.log(blob);
     callback(
@@ -20,7 +21,7 @@ const PostContents = ({ editorRef }: PostContentProps) => {
 
   return (
     // 기본 content 어떻게 주어줄 지
-    <TuiEditor content="" editorRef={editorRef} imageHandler={imageHandler} />
+    <TuiEditor content={initialValue} editorRef={editorRef} imageHandler={imageHandler} />
   );
 };
 

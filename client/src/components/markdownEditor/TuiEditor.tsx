@@ -15,7 +15,7 @@ const toolbar = [['heading', 'bold', 'italic', 'strike'], ['hr', 'quote', 'ul', 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
   return (
     <Editor
-      initialValue={content ?? ' '}
+      initialValue={content ?? '내용을 입력해주세요'}
       initialEditType="wysiwyg"
       autofocus={false}
       ref={editorRef}
