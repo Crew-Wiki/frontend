@@ -1,8 +1,9 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useGetDocumentByTitle from '@/api/get/useGetDocumentByTitle';
+import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
 import DocumentHeader from './DocumentHeader';
 import DocumentContents from './DocumentContents';
+import DocumentFooter from './DocumentFooter';
 
 interface DocumentPageProps {
   daemoon?: string;
@@ -21,12 +22,13 @@ const DocumentPage = ({ daemoon }: DocumentPageProps) => {
   }, [daemoon]);
 
   return (
-    <Suspense>
+    <>
       <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8">
         <DocumentHeader title={docs.title} />
         <DocumentContents contents={docs.contents} />
       </div>
-    </Suspense>
+      <DocumentFooter generateTime={docs.generateTime} />
+    </>
   );
 };
 
