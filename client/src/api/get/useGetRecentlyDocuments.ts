@@ -5,10 +5,8 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 const { GET_RECENTLY_DOCUMENTS } = ENDPOINT;
 
 interface RecentlyDocument {
-  logId: number;
+  documentId: number;
   title: string;
-  contents: string;
-  writer: string;
   generateTime: string;
 }
 

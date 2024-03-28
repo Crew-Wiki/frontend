@@ -1,9 +1,12 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import DocumentPageWrapper from '@components/DocumentPageWrapper';
+import WritePage from '@components/WritePage';
+import usePostDocument from '@api/post/usePostDocument';
+import usePutDocument from '@api/put/usePutDocument';
+import { WikiDocument } from 'types/DocumentType';
 import Layout from './components/Layout/Layout';
 import URLS from './constants/urls';
-import PostPage from './components/PostPage';
 
 const Router = () => {
   return (
@@ -14,7 +17,14 @@ const Router = () => {
         <Route path={URLS.WIKI} element={<DocumentPageWrapper daemoon={URLS.DAEMOON} />}>
           <Route path={URLS.DOCS} element={<DocumentPageWrapper />} />
         </Route>
-        <Route path={URLS.POST} element={<PostPage />} />
+        {/* post */}
+        <Route path={URLS.POST} element={<WritePage mode="add" {...usePostDocument()} />} />
+        <Route
+          path={URLS.EDIT}
+          element={
+            <WritePage mode="edit" {...usePutDocument()} defaultDocumentData={useLocation().state as WikiDocument} />
+          }
+        />
       </Route>
     </Routes>
   );

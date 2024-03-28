@@ -24,7 +24,7 @@ const DocumentPage = ({ daemoon }: DocumentPageProps) => {
   return (
     <>
       <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8">
-        <DocumentHeader title={docs.title} />
+        <DocumentHeader wiki={docs} />
         <DocumentContents contents={docs.contents} />
       </div>
       <DocumentFooter generateTime={docs.generateTime} />
