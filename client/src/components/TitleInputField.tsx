@@ -10,9 +10,10 @@ interface TitleInputFieldProps {
     setNickname: (event: React.ChangeEvent<HTMLInputElement>) => void;
     errorMessage: string;
   };
+  disabled: boolean;
 }
 
-const TitleInputField = ({ titleState, nicknameState }: TitleInputFieldProps) => {
+const TitleInputField = ({ titleState, nicknameState, disabled }: TitleInputFieldProps) => {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="w-full font-pretendard text-error-error text-sm text-right">{nicknameState.errorMessage}</div>
@@ -23,7 +24,8 @@ const TitleInputField = ({ titleState, nicknameState }: TitleInputFieldProps) =>
             placeholder="작성할 문서의 제목을 입력해 주세요"
             value={titleState.title}
             onChange={titleState.setTitle}
-            maxLength={30}
+            maxLength={12}
+            disabled={disabled}
           />
         </div>
         <div className="flex w-36 h-14 px-4 py-2.5 rounded-xl bg-white border-grayscale-200 border-solid border gap-2">
