@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import RecentlyEditWrapper from '@components/RecentlyEditWrapper';
 import WikiHeader from '../WikiHeader';
-import RecentlyEdit from '../RecentlyEdit';
 
 const Layout = () => {
   return (
@@ -12,7 +12,7 @@ const Layout = () => {
           <div className="flex flex-col gap-6 w-full">
             <Outlet />
           </div>
-          <RecentlyEdit />
+          <RecentlyEditWrapper />
         </main>
       </div>
     </div>
