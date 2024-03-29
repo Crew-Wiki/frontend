@@ -5,7 +5,7 @@ import KEYS from '@constants/keys';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
 import { AxiosResponse } from 'axios';
-import { WikiDocument, WriteDocumentContent } from 'types/DocumentType';
+import { WikiDocument, WriteDocumentContent } from '@type/DocumentType';
 
 const { UPDATE_DOCUMENT, GET_DOCUMENT_BY_TITLE } = ENDPOINT;
 const { QUERY } = KEYS;

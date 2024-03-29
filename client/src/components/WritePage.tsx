@@ -3,7 +3,7 @@ import usePostPage from '@hooks/usePostPage';
 import { Editor } from '@toast-ui/react-editor';
 import { UseMutateFunction } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
-import { WikiDocument, WriteDocumentContent } from 'types/DocumentType';
+import { WikiDocument, WriteDocumentContent } from '@type/DocumentType';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
 import PostContents from './PostContents';
