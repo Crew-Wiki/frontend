@@ -8,10 +8,10 @@ import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle
 import { twMerge } from 'tailwind-merge';
 
 interface WikiInputProps {
-  className?:string
+  className?: string;
 }
-      
-const WikiInputField = ({className}:WikiInputProps) => {
+
+const WikiInputField = ({ className }: WikiInputProps) => {
   const [value, setValue] = useInput<string>('');
   const navigate = useNavigate();
 
@@ -23,7 +23,10 @@ const WikiInputField = ({className}:WikiInputProps) => {
   return (
     <form
       onSubmit={onSubmit}
-      className=twMerge("flex w-80 h-11 px-4 py-2.5 rounded-xl bg-white border-grayscale-200 border-solid border gap-2", className)
+      className={twMerge(
+        'flex w-80 h-11 px-4 py-2.5 rounded-xl bg-white border-grayscale-200 border-solid border gap-2',
+        className,
+      )}
     >
       <input
         className="w-full outline-none font-pretendard text-base font-normal text-grayscale-800 placeholder:text-grayscale-lightText "
