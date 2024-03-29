@@ -10,7 +10,11 @@ type Props = {
   content?: string;
 };
 
-const toolbar = [['heading', 'bold', 'italic', 'strike'], ['hr', 'quote', 'ul', 'ol'], ['image']];
+const toolbar = [
+  ['heading', 'bold', 'italic', 'strike'],
+  ['hr', 'quote', 'ul', 'ol'],
+  ['image', 'link'],
+];
 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
   return (

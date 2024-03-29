@@ -11,3 +11,11 @@ export interface WriteDocumentContent {
   contents: string;
   writer: string;
 }
+
+export interface WikiDocumentLog {
+  logId: number;
+  title: string;
+  contents: string;
+  writer: string;
+  generateTime: string;
+}

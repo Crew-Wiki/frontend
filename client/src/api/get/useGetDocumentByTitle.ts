@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import axiosInstance from '@utils/axios';
 import ENDPOINT from '@constants/endpoint';
-import { WikiDocument } from 'types/DocumentType';
+import { WikiDocument } from '@type/DocumentType';
 
 const { GET_DOCUMENT_BY_TITLE } = ENDPOINT;
 

@@ -4,9 +4,10 @@ import DocumentPageWrapper from '@components/DocumentPageWrapper';
 import WritePage from '@components/WritePage';
 import usePostDocument from '@api/post/usePostDocument';
 import usePutDocument from '@api/put/usePutDocument';
-import { WikiDocument } from 'types/DocumentType';
-import Layout from './components/Layout/Layout';
-import URLS from './constants/urls';
+import { WikiDocument } from '@type/DocumentType';
+import EditLogs from '@components/EditLogs';
+import Layout from '@components/Layout/Layout';
+import URLS from '@constants/urls';
 
 const Router = () => {
   return (
@@ -14,9 +15,12 @@ const Router = () => {
       <Route element={<Layout />}>
         {/* main */}
         <Route path={URLS.MAIN} element={<Navigate to={URLS.WIKI} />} />
-        <Route path={URLS.WIKI} element={<DocumentPageWrapper daemoon={URLS.DAEMOON} />}>
-          <Route path={URLS.DOCS} element={<DocumentPageWrapper />} />
-        </Route>
+        <Route path={URLS.WIKI} element={<DocumentPageWrapper daemoon={URLS.DAEMOON} />} />
+        <Route path={`${URLS.WIKI}/${URLS.DOCS}`} element={<DocumentPageWrapper />} />
+        <Route
+          path={`${URLS.WIKI}/${URLS.DOCS}/${URLS.LOGS}`}
+          element={<EditLogs defaultDocumentData={useLocation().state as WikiDocument} />}
+        />
         {/* post */}
         <Route path={URLS.POST} element={<WritePage mode="add" {...usePostDocument()} />} />
         <Route
@@ -26,6 +30,7 @@ const Router = () => {
           }
         />
       </Route>
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
