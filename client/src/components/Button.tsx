@@ -20,7 +20,7 @@ const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => 
     primary: 'bg-primary-primary text-white',
     secondary: 'bg-white text-primary-primary border-primary-primary border-solid border',
     tertiary: 'bg-white text-grayscale-lightText border-grayscale-border border-solid border',
-    text: '',
+    text: 'bg-white text-primary-primary shadow-md',
   };
   return (
     <button
