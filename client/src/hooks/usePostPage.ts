@@ -1,4 +1,4 @@
-import { WikiDocument } from 'types/DocumentType';
+import { WikiDocument } from '@type/DocumentType';
 import useInput from './useInput';
 import useNicknameInput from './useNicknameInput';
 
