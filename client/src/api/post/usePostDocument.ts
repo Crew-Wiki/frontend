@@ -1,13 +1,16 @@
-import axiosInstance from '@/utils/axios';
-import ENDPOINT from '@/constants/endpoint';
-import KEYS from '@/constants/keys';
 import { useMutation } from '@tanstack/react-query';
+import axiosInstance from '@utils/axios';
+import ENDPOINT from '@constants/endpoint';
+import KEYS from '@constants/keys';
+import { useNavigate } from 'react-router-dom';
+import URLS from '@constants/urls';
+import { AxiosResponse } from 'axios';
 
 const { POST_DOCUMENT } = ENDPOINT;
 const { QUERY } = KEYS;
 
 // 요청할 때 필요한 데이터
-interface PostDocumentContent {
+export interface PostDocumentContent {
   title: string;
   contents: string;
   writer: string;
@@ -29,20 +32,21 @@ interface PostDocumentResponse {
 }
 
 const usePostDocument = () => {
-  const writeDocument = async ({ title, contents, writer }: PostDocumentContent) => {
-    const body = { contents, writer };
-    const response = await axiosInstance.post<PostDocumentRequest, PostDocumentResponse>(
-      `${POST_DOCUMENT}/${title}`,
+  const writeDocument = async (body: PostDocumentContent) => {
+    const response = await axiosInstance.post<PostDocumentContent, AxiosResponse<PostDocumentResponse>>(
+      `${POST_DOCUMENT}`,
       body,
     );
     return response;
   };
 
+  const navigate = useNavigate();
+
   const { mutate, isPending } = useMutation({
     mutationKey: [QUERY.POST_DOCUMENT],
     mutationFn: writeDocument,
     onSuccess: (response) => {
-      console.log(response);
+      navigate(`${URLS.WIKI}/${response.data.title}`);
     },
   });
 
