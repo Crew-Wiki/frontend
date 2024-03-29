@@ -13,6 +13,7 @@
     "@types/node": "^16.18.89",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "aws-sdk": "^2.1588.0",
     "axios": "^1.6.7",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",

@@ -19,3 +19,9 @@ export interface WikiDocumentLog {
   writer: string;
   generateTime: string;
 }
+
+export interface UploadImageMeta {
+  file: File;
+  objectURL: string;
+  s3URL: string;
+}

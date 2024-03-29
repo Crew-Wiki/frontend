@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import usePostPage from '@hooks/usePostPage';
 import { Editor } from '@toast-ui/react-editor';
 import { UseMutateFunction } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
-import { WikiDocument, WriteDocumentContent } from '@type/DocumentType';
+import { UploadImageMeta, WikiDocument, WriteDocumentContent } from '@type/DocumentType';
+import uploadImages from '@api/awsS3';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
 import PostContents from './PostContents';
@@ -21,24 +22,33 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
   }
   const editorRef = useRef<Editor | null>(null);
   const { titleState, nicknameState } = usePostPage(defaultDocumentData);
+  const [images, setImages] = useState<UploadImageMeta[]>([]);
 
-  const onClick = () => {
-    if (editorRef === null) return;
+  const getMarkup = () => {
     const editorInstance = editorRef.current?.getInstance();
     const contentMark = editorInstance?.getMarkdown();
+    return contentMark;
+  };
+
+  const onClick = async () => {
+    if (editorRef === null) return;
+
+    const s3URL = await uploadImages(images);
+    console.log(s3URL);
+
     const context = {
       title: titleState.title,
-      contents: contentMark ?? '',
+      contents: getMarkup() ?? '',
       writer: nicknameState.nickname,
     };
 
-    writeDocument(context);
+    // writeDocument(context);
   };
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
       <PostHeader mode={mode} onClick={onClick} isPending={isPending} />
       <TitleInputField titleState={titleState} nicknameState={nicknameState} disabled={mode === 'edit'} />
-      <PostContents editorRef={editorRef} initialValue={defaultDocumentData?.contents} />
+      <PostContents editorRef={editorRef} initialValue={defaultDocumentData?.contents} setImages={setImages} />
     </div>
   );
 };
