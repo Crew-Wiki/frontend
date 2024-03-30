@@ -19,7 +19,7 @@ const toolbar = [
 ];
 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
-  const isDesktop = window.screen.availWidth >= 768;
+  const isDesktop = window.innerWidth >= 768;
   return (
     <Editor
       initialValue={content ?? '내용을 입력해주세요'}
