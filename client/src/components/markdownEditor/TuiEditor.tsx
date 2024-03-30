@@ -15,6 +15,7 @@ const toolbar = [
   ['heading', 'bold', 'italic', 'strike'],
   ['hr', 'quote', 'ul', 'ol'],
   ['image', 'link'],
+  ['scrollSync'],
 ];
 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
