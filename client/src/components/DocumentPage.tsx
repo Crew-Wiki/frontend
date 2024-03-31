@@ -23,7 +23,7 @@ const DocumentPage = ({ daemoon }: DocumentPageProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-2 ">
+      <div className="flex flex-col gap-6 w-full h-fit min-h-[864px] bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-2">
         <DocumentHeader wiki={docs} />
         <DocumentContents contents={docs.contents} />
       </div>
