@@ -30,19 +30,27 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     return contentMark;
   };
 
+  const replaceLocalUrlToS3Url = (contents: string, imageMetas: UploadImageMeta[]) => {
+    let newContents = contents;
+    imageMetas.forEach(({ objectURL, s3URL }) => {
+      newContents = newContents.replace(objectURL, s3URL);
+    });
+
+    return newContents;
+  };
+
   const onClick = async () => {
     if (editorRef === null) return;
-
-    const s3URL = await uploadImages(images);
-    console.log(s3URL);
+    const newMetas = await uploadImages(titleState.title, images);
+    const linkReplacedContents = replaceLocalUrlToS3Url(getMarkup() ?? '', newMetas);
 
     const context = {
       title: titleState.title,
-      contents: getMarkup() ?? '',
+      contents: linkReplacedContents,
       writer: nicknameState.nickname,
     };
 
-    // writeDocument(context);
+    writeDocument(context);
   };
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
