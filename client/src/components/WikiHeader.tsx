@@ -4,20 +4,41 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
 import WikiInputField from './WikiInputField';
 
-interface WikiHeaderProps {
-  isShown: boolean;
+interface ScrollPosition {
+  prev: number;
+  current: number;
 }
 
-const WikiHeader = ({ isShown }: WikiHeaderProps) => {
+const WikiHeader = () => {
+  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
+    prev: window.scrollY,
+    current: window.scrollY,
+  });
+  const [showHeader, setShowHeader] = useState(true);
   const [y, setY] = useState(0);
 
+  const handleScroll = () => {
+    setScrollPosition({ prev: scrollPosition.current, current: window.scrollY });
+    setShowHeader(scrollPosition.prev >= scrollPosition.current);
+    if (window.scrollY < 50) {
+      setShowHeader(true);
+    }
+  };
+
   useEffect(() => {
-    if (isShown) {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [window.scrollY]);
+
+  useEffect(() => {
+    if (showHeader) {
       setY(0);
     } else {
       setY(-80);
     }
-  }, [isShown]);
+  }, [showHeader]);
 
   return (
     <motion.div
