@@ -1,8 +1,10 @@
 import axiosInstance from '@utils/axios';
 import ENDPOINT from '@constants/endpoint';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import KEYS from '@constants/keys';
 
 const { GET_RECENTLY_DOCUMENTS } = ENDPOINT;
+const { QUERY } = KEYS;
 
 interface RecentlyDocument {
   documentId: number;
@@ -21,7 +23,7 @@ const useGetRecentlyDocuments = () => {
   };
 
   const { data } = useSuspenseQuery({
-    queryKey: [GET_RECENTLY_DOCUMENTS],
+    queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
     queryFn: getRecentlyDocuments,
   });
 
