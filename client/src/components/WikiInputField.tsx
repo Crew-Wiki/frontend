@@ -4,7 +4,6 @@ import { ReactComponent as SearchCircle } from '@assets/image/search-circle-seco
 import useInput from '@hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
-import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
 import { twMerge } from 'tailwind-merge';
 
 interface WikiInputProps {

@@ -5,6 +5,15 @@ declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production';
     REACT_APP_SERVER: 'string';
+    REACT_APP_BUCKET_NAME: 'string';
+    REACT_APP_BUCKET_REGION: 'string';
+    REACT_APP_ACCESS_KEY: 'string';
+    REACT_APP_SECRET_KEY: 'string';
+
+    REACT_APP_TEST_BUCKET_NAME: 'string';
+    REACT_APP_TEST_BUCKET_REGION: 'string';
+    REACT_APP_TEST_ACCESS_KEY: 'string';
+    REACT_APP_TEST_SECRET_KEY: 'string';
   }
 }
 
