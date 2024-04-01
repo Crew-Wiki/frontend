@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '@utils/axios';
 import ENDPOINT from '@constants/endpoint';
 import KEYS from '@constants/keys';
@@ -42,10 +42,16 @@ const usePostDocument = () => {
 
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
     mutationKey: [QUERY.POST_DOCUMENT],
     mutationFn: writeDocument,
     onSuccess: (response) => {
+      queryClient.removeQueries({
+        queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
+      });
+
       navigate(`${URLS.WIKI}/${response.data.title}`);
     },
   });
