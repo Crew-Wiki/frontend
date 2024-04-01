@@ -7,7 +7,7 @@ import URLS from '@constants/urls';
 import { AxiosResponse } from 'axios';
 import { WikiDocument, WriteDocumentContent } from '@type/DocumentType';
 
-const { UPDATE_DOCUMENT, GET_DOCUMENT_BY_TITLE } = ENDPOINT;
+const { UPDATE_DOCUMENT } = ENDPOINT;
 const { QUERY } = KEYS;
 
 const usePutDocument = () => {
@@ -28,7 +28,10 @@ const usePutDocument = () => {
     mutationFn: writeDocument,
     onSuccess: (response) => {
       queryClient.removeQueries({
-        queryKey: [GET_DOCUMENT_BY_TITLE, response.data.title],
+        queryKey: [QUERY.GET_DOCUMENT_BY_TITLE, response.data.title],
+      });
+      queryClient.removeQueries({
+        queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
       });
       navigate(`${URLS.WIKI}/${response.data.title}`);
     },

@@ -1,28 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import App from './App';
 import './index.css';
-import Router from './Router';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
+      staleTime: 1000 * 60 * 60 * 12, // 12 hours
+      gcTime: 1000 * 60 * 60 * 12, // 12 hours
       retry: 0,
     },
   },
 });
 
+const persister = createSyncStoragePersister({
+  storage: window.sessionStorage,
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </QueryClientProvider>
+      <ReactQueryDevtools />
+    </PersistQueryClientProvider>
   </React.StrictMode>,
 );
