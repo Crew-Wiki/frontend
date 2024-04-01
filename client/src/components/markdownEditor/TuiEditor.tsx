@@ -1,6 +1,7 @@
 import React from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/toastui-editor.css';
+import { log } from 'console';
 
 type HookCallback = (url: string, text?: string) => void;
 
@@ -14,17 +15,20 @@ const toolbar = [
   ['heading', 'bold', 'italic', 'strike'],
   ['hr', 'quote', 'ul', 'ol'],
   ['image', 'link'],
+  ['scrollSync'],
 ];
 
 function TuiEditor({ content, editorRef, imageHandler }: Props) {
+  const isDesktop = window.innerWidth >= 768;
   return (
     <Editor
       initialValue={content ?? '내용을 입력해주세요'}
-      initialEditType="wysiwyg"
+      initialEditType="markdown"
       autofocus={false}
+      previewStyle={isDesktop ? 'vertical' : 'tab'}
       ref={editorRef}
       toolbarItems={toolbar}
-      hideModeSwitch
+      hideModeSwitch={true}
       height="500px"
       hooks={{ addImageBlobHook: imageHandler }}
     />
