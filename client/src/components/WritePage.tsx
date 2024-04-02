@@ -5,6 +5,7 @@ import { UseMutateFunction } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { UploadImageMeta, WikiDocument, WriteDocumentContent } from '@type/DocumentType';
 import uploadImages from '@api/awsS3';
+import getBytes from '@utils/getBytes';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
 import PostContents from './PostContents';
@@ -41,6 +42,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
 
   const onClick = async () => {
     if (editorRef === null) return;
+
     const newMetas = await uploadImages(titleState.title, images);
     const linkReplacedContents = replaceLocalUrlToS3Url(getMarkup() ?? '', newMetas);
 
@@ -48,6 +50,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
       title: titleState.title,
       contents: linkReplacedContents,
       writer: nicknameState.nickname,
+      documentBytes: getBytes(getMarkup() ?? ''),
     };
 
     writeDocument(context);

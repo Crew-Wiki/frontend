@@ -6,7 +6,7 @@ const URLS = {
   POST: '/post',
   DAEMOON: '대문',
   LOGS: 'logs',
-  SPECIFIC_LOG: ':logId',
+  SPECIFIC_LOG: 'log/:logId',
 };
 
 export default URLS;
