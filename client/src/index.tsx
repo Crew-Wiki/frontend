@@ -5,6 +5,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import PersistGate from './PersistGate';
 import App from './App';
 import './index.css';
 
@@ -28,9 +29,11 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <PersistGate fallback={null}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
       <ReactQueryDevtools />
     </PersistQueryClientProvider>
   </React.StrictMode>,
