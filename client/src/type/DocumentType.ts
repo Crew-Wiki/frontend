@@ -10,6 +10,7 @@ export interface WriteDocumentContent {
   title: string;
   contents: string;
   writer: string;
+  documentBytes: number;
 }
 
 export interface WikiDocumentLog {
