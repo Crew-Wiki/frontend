@@ -8,7 +8,7 @@ interface LogsContentsProps {
 
 const LogsContents = ({ title }: LogsContentsProps) => {
   // 아직 api가 미완성된듯...
-  // const { documentLogs } = useGetDocumentLogs(title);
+  const { documentLogs } = useGetDocumentLogs(title);
 
   return (
     <table className="border-separate border-spacing-y-6">
@@ -28,8 +28,8 @@ const LogsContents = ({ title }: LogsContentsProps) => {
         </tr>
       </thead>
       <tbody>
-        {Array.from({ length: 7 }).map((_, index) => (
-          <EachLogContent key={index} />
+        {documentLogs.map((docs, index) => (
+          <EachLogContent key={index} index={documentLogs.length - index} documentLog={docs} />
         ))}
       </tbody>
     </table>
