@@ -25,6 +25,7 @@ const useGetRecentlyDocuments = () => {
   const { data } = useSuspenseQuery({
     queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
     queryFn: getRecentlyDocuments,
+    select: (recently) => recently.documents.slice(0, 20),
   });
 
   return {

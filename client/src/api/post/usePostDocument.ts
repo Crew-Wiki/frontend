@@ -14,6 +14,7 @@ export interface PostDocumentContent {
   title: string;
   contents: string;
   writer: string;
+  documentBytes: number;
 }
 
 // Request body 타입

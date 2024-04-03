@@ -5,6 +5,8 @@ type ButtonState = 'default'|'disabled'|'pressed';
 type ButtonStyle = 'primary' | 'secondary' | 'tertiary' | 'text';
 
 interface ButtonProps {
+  size: 'm' | 's' | 'xs' | 'xxs';
+  style: 'primary' | 'secondary' | 'tertiary' | 'text';
   size: 'm' | 's' | 'xs';
   style: ButtonStyle;
   text: string;
@@ -24,6 +26,7 @@ const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => 
   }
 
   const BUTTONSIZE = {
+    xxs: 'h-6 rounded-[1.125rem] px-5 whitespace-nowrap',
     xs: 'h-9 rounded-[1.125rem] px-3',
     s: 'h-11 rounded-[1.375rem] px-4',
     m: 'h-14 rounded-[1.75rem] px-4',
