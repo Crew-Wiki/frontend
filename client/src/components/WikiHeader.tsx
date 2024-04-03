@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
+import LogoImage from '@assets/image/hangseong-white.png';
 import RandomButton from '@assets/image/RandomButton';
 import WikiInputField from './WikiInputField';
 import { twMerge } from 'tailwind-merge';
@@ -56,6 +57,7 @@ const WikiHeader = () => {
       <div className="flex flex-col justify-center items-center gap-y-4 py-4">
         <div className="flex flex-row justify-between items-center px-4 header-container max-w-[1440px] w-full">
           <Link to="/">
+            <img src={LogoImage} alt="logo" className="h-10 md:h-16" />
             <h1 className="font-bm text-2xl text-white font-normal">크루위키</h1>
           </Link>
 

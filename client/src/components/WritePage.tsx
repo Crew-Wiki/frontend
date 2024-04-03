@@ -40,8 +40,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     return newContents;
   };
 
-  const isInputEmpty =  titleState.title === '' || nicknameState.nickname === '';
-  
+  const isInputEmpty = titleState.title === '' || nicknameState.nickname === '';
 
   const onClick = async () => {
     if (editorRef === null) return;

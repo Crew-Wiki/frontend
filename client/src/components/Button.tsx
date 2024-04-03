@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type ButtonState = 'default'|'disabled'|'pressed';
+type ButtonState = 'default' | 'disabled' | 'pressed';
 type ButtonStyle = 'primary' | 'secondary' | 'tertiary' | 'text';
 
 interface ButtonProps {
@@ -14,9 +14,8 @@ interface ButtonProps {
 }
 
 const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => {
-
   const [buttonState, setButtonState] = useState<ButtonState>('default');
-  if (disabled && buttonState !== 'disabled'){
+  if (disabled && buttonState !== 'disabled') {
     setButtonState('disabled');
   }
   if (!disabled && buttonState === 'disabled') {
@@ -29,28 +28,27 @@ const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => 
     s: 'h-11 rounded-[1.375rem] px-4',
     m: 'h-14 rounded-[1.75rem] px-4',
   };
-  
-  const BUTTON_STYLE:Record<ButtonState, Record<ButtonStyle,string>> = {
-    default:{
-    primary: 'bg-primary-primary text-white',
-    secondary: 'bg-white text-primary-primary border-primary-primary border-solid border',
-    tertiary: 'bg-white text-grayscale-lightText border-grayscale-border border-solid border',
-    text: 'bg-white text-primary-primary shadow-md'
-      },
-    disabled:{
+
+  const BUTTON_STYLE: Record<ButtonState, Record<ButtonStyle, string>> = {
+    default: {
+      primary: 'bg-primary-primary text-white',
+      secondary: 'bg-white text-primary-primary border-primary-primary border-solid border',
+      tertiary: 'bg-white text-grayscale-lightText border-grayscale-border border-solid border',
+      text: 'bg-white text-primary-primary shadow-md',
+    },
+    disabled: {
       primary: 'bg-grayscale-100 text-grayscale-400',
-    secondary: 'bg-grayscale-50 text-grayscale-400 border-grayscale-100 border-solid border',
-    tertiary: 'bg-grayscale-50 text-grayscale-400 border-grayscale-100 border-grayscale-border border-solid border',
-    text: 'bg-grayscale-100 text-grayscale-400 shadow-md'
-      },
-    pressed:{
+      secondary: 'bg-grayscale-50 text-grayscale-400 border-grayscale-100 border-solid border',
+      tertiary: 'bg-grayscale-50 text-grayscale-400 border-grayscale-100 border-grayscale-border border-solid border',
+      text: 'bg-grayscale-100 text-grayscale-400 shadow-md',
+    },
+    pressed: {
       primary: 'bg-grayscale-100 ',
       secondary: 'bg-grayscale-100 ',
       tertiary: 'bg-grayscale-100 ',
-      text: 'bg-grayscale-100 '
-    }
+      text: 'bg-grayscale-100 ',
+    },
   };
-
 
   return (
     <button
