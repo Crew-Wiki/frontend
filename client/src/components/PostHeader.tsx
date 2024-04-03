@@ -28,7 +28,7 @@ const PostHeader = ({ mode, onClick, isPending, isInputEmpty }: PostHeaderProps)
       <DocumentTitle title={MODE_TITLE[mode]} />
       <fieldset className="flex gap-2">
         <Button style="tertiary" size="xs" text="취소하기" onClick={goBack} />
-        <Button style="primary" size="xs" text="작성완료" onClick={onClick} disabled={isPending||isInputEmpty} />
+        <Button style="primary" size="xs" text="작성완료" onClick={onClick} disabled={isPending || isInputEmpty} />
       </fieldset>
     </header>
   );
