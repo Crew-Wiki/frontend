@@ -50,7 +50,7 @@ const WikiHeader = () => {
 
   return (
     <motion.div
-      className="fixed top-0 w-full bg-primary-primary "
+      className="sticky top-0 w-full bg-primary-primary "
       animate={{ y }}
       transition={{ duration: 0.3 }}
     >
