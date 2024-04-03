@@ -54,12 +54,13 @@ const WikiHeader = () => {
       animate={{ y }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex flex-col justify-center items-center gap-y-4 py-4">
+      <div className="flex flex-col justify-center items-center gap-y-4">
         <div className="flex flex-row justify-between items-center px-4 header-container max-w-[1440px] w-full">
-          <Link to="/">
+          <Link to="/"  className="flex gap-2 items-center">
             <img src={LogoImage} alt="logo" className="h-10 md:h-16" />
             <h1 className="font-bm text-2xl text-white font-normal">크루위키</h1>
           </Link>
+
 
           <div className="flex items-center">
             <RandomButton className="mr-4 cursor-pointer" />
