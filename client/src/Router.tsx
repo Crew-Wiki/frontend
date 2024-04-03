@@ -8,6 +8,7 @@ import { WikiDocument } from '@type/DocumentType';
 import EditLogs from '@components/EditLogs';
 import Layout from '@components/Layout/Layout';
 import URLS from '@constants/urls';
+import LogPageWrapper from '@components/LogPageWrapper';
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
           path={`${URLS.WIKI}/${URLS.DOCS}/${URLS.LOGS}`}
           element={<EditLogs defaultDocumentData={useLocation().state as WikiDocument} />}
         />
+        <Route path={`${URLS.WIKI}/${URLS.DOCS}/${URLS.SPECIFIC_LOG}`} element={<LogPageWrapper />} />
         {/* post */}
         <Route path={URLS.POST} element={<WritePage mode="add" {...usePostDocument()} />} />
         <Route
