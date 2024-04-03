@@ -1,4 +1,5 @@
 import { UploadImageMeta } from '@type/DocumentType';
+import Resizer from 'react-image-file-resizer';
 import AWS from 'aws-sdk';
 
 const bucketName = process.env.REACT_APP_BUCKET_NAME;
@@ -17,17 +18,22 @@ const s3 = new AWS.S3({
   params: { Bucket: bucketName },
 });
 
+const resizeFile = (file: File) =>
+  new Promise((res) => {
+    Resizer.imageFileResizer(file, 1000, 1000, 'JPEG', 70, 0, (uri) => res(uri), 'file');
+  });
+
 export default async function uploadImages(albumName: string, uploadImageMetas: UploadImageMeta[]) {
   const newMetas = await Promise.all(
     uploadImageMetas.map(async (imageMeta) => {
-      const { file } = imageMeta;
-      const uploadImageKey = `${albumName}/${file.name}`;
+      const resizedImage = (await resizeFile(imageMeta.file)) as File;
+      const uploadImageKey = `${albumName}/${imageMeta.file.name}`;
 
       const upload = s3.upload({
         ACL: 'public-read',
         Bucket: bucketName,
         Key: uploadImageKey,
-        Body: file,
+        Body: resizedImage,
       });
 
       const newMeta = imageMeta;
