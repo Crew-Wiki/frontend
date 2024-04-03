@@ -1,6 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import RecentlyEditWrapper from '@components/RecentlyEditWrapper';
+import DocumentWrapper from '@components/DocumentWrapper';
+import RecentlyEdit from '@components/RecentlyEdit';
+import RecentlyEditFallback from '@components/RecentlyEditFallback';
 import WikiHeader from '../WikiHeader';
 
 const Layout = () => {
@@ -12,7 +14,9 @@ const Layout = () => {
           <div className="flex flex-col gap-6 w-full max-[768px]:gap-2">
             <Outlet />
           </div>
-          <RecentlyEditWrapper />
+          <DocumentWrapper fallback={RecentlyEditFallback}>
+            <RecentlyEdit />
+          </DocumentWrapper>
         </main>
       </div>
     </div>
