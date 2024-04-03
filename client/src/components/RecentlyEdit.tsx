@@ -11,7 +11,7 @@ const RecentlyEdit = () => {
       <h2 className="flex justify-center items-center w-full h-12 font-pretendard font-bold text-lg border-b border-primary-100">
         최근 편집
       </h2>
-      {recentlyDocuments.documents.map((document) => {
+      {recentlyDocuments.map((document) => {
         return (
           <a
             key={`recently-${document.documentId}`}
