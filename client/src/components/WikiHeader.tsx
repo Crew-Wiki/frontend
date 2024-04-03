@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
 import LogoImage from '@assets/image/hangseong-white.png';
+import RandomButton from '@assets/image/RandomButton';
 import WikiInputField from './WikiInputField';
 
 interface ScrollPosition {
