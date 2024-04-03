@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface TitleInputFieldProps {
   titleState: {
@@ -23,9 +24,17 @@ const TitleInputField = ({ titleState, nicknameState, disabled }: TitleInputFiel
         <div className="font-pretendard text-error-error text-sm text-right">{nicknameState.errorMessage}</div>
       </div>
       <div className="flex gap-6 w-full h-fit">
-        <div className="flex w-full h-14 px-4 py-2.5 rounded-xl bg-white border-grayscale-200 border-solid border gap-2 max-[768px]:text-sm max-[768px]:h-10">
+        <div
+          className={twMerge(
+            'flex w-full h-14 px-4 py-2.5 rounded-xl border-grayscale-200 border-solid border gap-2 max-[768px]:text-sm max-[768px]:h-10',
+            disabled ? 'bg-grayscale-50' : 'bg-white',
+          )}
+        >
           <input
-            className="w-full outline-none font-bm text-2xl text-grayscale-800 placeholder:text-grayscale-lightText max-[768px]:text-sm"
+            className={twMerge(
+              'w-full outline-none font-bm text-2xl  placeholder:text-grayscale-lightText max-[768px]:text-sm',
+              disabled ? 'text-grayscale-400' : 'text-grayscale-800',
+            )}
             placeholder="문서의 제목을 입력해 주세요"
             value={titleState.title}
             onChange={titleState.setTitle}

@@ -1,0 +1,13 @@
+diff --git a/node_modules/tailwindcss/lib/css/preflight.css b/node_modules/tailwindcss/lib/css/preflight.css
+index 3e4fa06..96482d3 100644
+--- a/node_modules/tailwindcss/lib/css/preflight.css
++++ b/node_modules/tailwindcss/lib/css/preflight.css
+@@ -200,7 +200,7 @@ button,
+ [type='submit'] {
+   -webkit-appearance: button; /* 1 */
+   background-color: transparent; /* 2 */
+-  background-image: none; /* 2 */
++  /* background-image: none; */
+ }
+ 
+ /*
