@@ -6,8 +6,6 @@ type ButtonStyle = 'primary' | 'secondary' | 'tertiary' | 'text';
 
 interface ButtonProps {
   size: 'm' | 's' | 'xs' | 'xxs';
-  style: 'primary' | 'secondary' | 'tertiary' | 'text';
-  size: 'm' | 's' | 'xs';
   style: ButtonStyle;
   text: string;
   type?: 'button' | 'reset' | 'submit';
