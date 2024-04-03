@@ -28,6 +28,7 @@
     ],
     "rules": {
         "import/no-unresolved": "off",
+        "no-param-reassign" : "off",
         "import/no-extraneous-dependencies": "off",
         "no-unused-vars": "warn",
         "prettier/prettier": ["error", {"endOfLine": "auto"}],

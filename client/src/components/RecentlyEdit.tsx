@@ -2,6 +2,7 @@ import React from 'react';
 import useGetRecentlyDocuments from '@api/get/useGetRecentlyDocuments';
 import URLS from '@constants/urls';
 import timeConverter from '@utils/TimeConverter';
+import { Link } from 'react-router-dom';
 
 const RecentlyEdit = () => {
   const { recentlyDocuments } = useGetRecentlyDocuments();
@@ -13,13 +14,13 @@ const RecentlyEdit = () => {
       </h2>
       {recentlyDocuments.map((document) => {
         return (
-          <a
+          <Link
             key={`recently-${document.documentId}`}
             className="px-2.5 py-2 font-pretendard font-normal text-xs border-b border-grayscale-100 last:border-0 text-grayscale-800"
-            href={`${URLS.WIKI}/${document.title}`}
+            to={`${URLS.WIKI}/${document.title}`}
           >
             {`[${timeConverter(document.generateTime, 'YYYY.MM.DD')}] ${document.title}`}
-          </a>
+          </Link>
         );
       })}
     </aside>
