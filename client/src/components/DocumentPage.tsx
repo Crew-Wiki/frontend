@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
+import { useQueryClient } from '@tanstack/react-query';
+import URLS from '@constants/urls';
 import DocumentHeader from './DocumentHeader';
 import DocumentContents from './DocumentContents';
 import DocumentFooter from './DocumentFooter';
-import { useQueryClient } from '@tanstack/react-query';
-import URLS from '@constants/urls';
 import Button from './Button';
 
 interface DocumentPageProps {
@@ -23,7 +23,6 @@ const DocumentPage = ({ daemoon }: DocumentPageProps) => {
       navigate(daemoon);
     }
   }, [daemoon]);
-
 
   const queryClient = useQueryClient();
 
