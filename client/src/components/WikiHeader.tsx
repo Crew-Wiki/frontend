@@ -49,7 +49,7 @@ const WikiHeader = () => {
 
   return (
     <motion.div
-      className="fixed top-0 w-full gap-y-4 py-4 bg-primary-primary "
+      className="fixed top-0 w-full gap-y-4 bg-primary-primary "
       animate={{ y }}
       transition={{ duration: 0.3 }}
     >
