@@ -13,12 +13,20 @@ export interface WriteDocumentContent {
   documentBytes: number;
 }
 
-export interface WikiDocumentLog {
+export interface WikiDocumentLogSummary {
+  documentBytes: number;
+  generateTime: string;
+  logId: number;
+  version: number;
+  writer: string;
+}
+
+export interface WikiDocumentLogDetail {
+  contents: string;
+  generateTime: string;
   logId: number;
   title: string;
-  contents: string;
   writer: string;
-  generateTime: string;
 }
 
 export interface UploadImageMeta {

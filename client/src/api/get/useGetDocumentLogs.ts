@@ -2,13 +2,13 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import KEYS from '@constants/keys';
 import axiosInstance from '@utils/axios';
 import ENDPOINT from '@constants/endpoint';
-import { WikiDocumentLog } from '@type/DocumentType';
+import { WikiDocumentLogSummary } from '@type/DocumentType';
 
 const { QUERY } = KEYS;
 
 const useGetDocumentLogs = (title: string) => {
   const getDocumentLogs = async () => {
-    const response = await axiosInstance.get<WikiDocumentLog[]>(ENDPOINT.GET_DOCUMENT_LOGS(title));
+    const response = await axiosInstance.get<WikiDocumentLogSummary[]>(ENDPOINT.GET_DOCUMENT_LOGS(title));
     return response.data;
   };
 
@@ -16,7 +16,7 @@ const useGetDocumentLogs = (title: string) => {
     queryKey: [QUERY.GET_DOCUMENT_LOGS, title],
     queryFn: getDocumentLogs,
     select: (logs) =>
-      logs.sort((a: WikiDocumentLog, b: WikiDocumentLog) => (a.generateTime <= b.generateTime ? 1 : -1)),
+      logs.sort((a: WikiDocumentLogSummary, b: WikiDocumentLogSummary) => (a.generateTime <= b.generateTime ? 1 : -1)),
   });
 
   return {
