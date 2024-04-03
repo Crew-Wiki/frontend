@@ -32,9 +32,9 @@ const DocumentHeader = ({ wiki }: DocumentHeaderProps) => {
   };
 
   return (
-    <header className="max-[768px]:flex-col-reverse max-[768px]:gap-4 flex justify-between w-full">
+    <header className="max-md:flex-col-reverse max-md:gap-4 flex justify-between w-full">
       <DocumentTitle title={wiki.title} />
-      <fieldset className="flex gap-2 max-[768px]:w-full max-[768px]:justify-center">
+      <fieldset className="flex gap-2 max-md:hidden">
         <Button style="tertiary" size="xs" text="새로고침" onClick={refreshData} />
         <Button style="tertiary" size="xs" text="편집하기" onClick={goEditPage} />
         <Button style="tertiary" size="xs" text="편집로그" onClick={goLogsPage} />
