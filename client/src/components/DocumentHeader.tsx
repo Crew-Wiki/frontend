@@ -28,7 +28,7 @@ const DocumentHeader = ({ wiki }: DocumentHeaderProps) => {
   };
 
   const goLogsPage = () => {
-    navigate(URLS.LOGS, { state: wiki });
+    navigate(`${URLS.WIKI}/${wiki.title}/${URLS.LOGS}`, { state: wiki });
   };
 
   return (

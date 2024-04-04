@@ -1,13 +1,25 @@
+import URLS from '@constants/urls';
 import React from 'react';
+import { useMatch } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 const FloatingButton = () => {
   const moveToTheTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const matchDocumentPage = useMatch(`/${URLS.WIKI}/${URLS.DOCS}`);
+  const matchLogs = useMatch(`/${URLS.WIKI}/${URLS.DOCS}/${URLS.LOGS}`);
+  const matchSpecificLog = useMatch(`/${URLS.WIKI}/${URLS.DOCS}/${URLS.SPECIFIC_LOG}`);
+
+  const hideThis = matchDocumentPage === null && matchLogs === null && matchSpecificLog === null;
+
   return (
     <svg
-      className={'drop-shadow-lg fixed bottom-8 right-8 cursor-pointer md:bottom-12 md:right-12'}
+      className={twMerge(
+        'drop-shadow-lg fixed bottom-8 right-8 cursor-pointer md:bottom-12 md:right-12',
+        hideThis ? 'hidden' : 'block',
+      )}
       width="36"
       height="36"
       viewBox="0 0 36 36"
