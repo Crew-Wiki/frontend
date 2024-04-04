@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AxiosError } from 'axios';
 
 import { FallbackProps } from 'react-error-boundary';
