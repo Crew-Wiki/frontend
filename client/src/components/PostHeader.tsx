@@ -7,6 +7,7 @@ interface PostHeaderProps {
   mode: 'add' | 'edit';
   onClick: () => void;
   isPending: boolean;
+  disabledSubmit: boolean;
 }
 
 const MODE_TITLE: Record<string, string> = {
@@ -14,7 +15,7 @@ const MODE_TITLE: Record<string, string> = {
   edit: '편집하기',
 };
 
-const PostHeader = ({ mode, onClick, isPending }: PostHeaderProps) => {
+const PostHeader = ({ mode, onClick, isPending, disabledSubmit }: PostHeaderProps) => {
   // isPending과 validation 연산해서 버튼의 disabled 넘겨주기
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const PostHeader = ({ mode, onClick, isPending }: PostHeaderProps) => {
       <DocumentTitle title={MODE_TITLE[mode]} />
       <fieldset className="flex gap-2">
         <Button style="tertiary" size="xs" text="취소하기" onClick={goBack} />
-        <Button style="primary" size="xs" text="작성완료" onClick={onClick} disabled={isPending} />
+        <Button style="primary" size="xs" text="작성완료" onClick={onClick} disabled={isPending || disabledSubmit} />
       </fieldset>
     </header>
   );

@@ -11,10 +11,10 @@ const { UPDATE_DOCUMENT } = ENDPOINT;
 const { QUERY } = KEYS;
 
 const usePutDocument = () => {
-  const writeDocument = async (content: WriteDocumentContent) => {
+  const writeDocument = async ({ title, writer, contents, documentBytes }: WriteDocumentContent) => {
     const response = await axiosInstance.put<WriteDocumentContent, AxiosResponse<WikiDocument>>(
-      `${UPDATE_DOCUMENT}/${content.title}`,
-      { writer: content.writer, contents: content.contents },
+      `${UPDATE_DOCUMENT}/${title}`,
+      { writer, contents, documentBytes },
     );
     return response;
   };
@@ -33,6 +33,7 @@ const usePutDocument = () => {
       queryClient.removeQueries({
         queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
       });
+      queryClient.invalidateQueries({ queryKey: [QUERY.GET_DOCUMENT_LOGS, response.data.title] });
       navigate(`${URLS.WIKI}/${response.data.title}`);
     },
   });

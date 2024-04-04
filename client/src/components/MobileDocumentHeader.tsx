@@ -1,18 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import URLS from '@constants/urls';
-import { WikiDocument } from '@type/DocumentType';
 import { useQueryClient } from '@tanstack/react-query';
-import DocumentTitle from './DocumentTitle';
+import URLS from '@constants/urls';
+import { useNavigate } from 'react-router-dom';
+import { WikiDocument, WikiDocumentLogDetail } from '@type/DocumentType';
 import Button from './Button';
 
-interface DocumentHeaderProps {
-  wiki: WikiDocument;
+interface MobileDocumentHeaderProps {
+  docs: WikiDocumentLogDetail | WikiDocument;
 }
 
-const DocumentHeader = ({ wiki }: DocumentHeaderProps) => {
-  const navigate = useNavigate();
+const MobileDocumentHeader = ({ docs }: MobileDocumentHeaderProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const refreshData = () => {
     queryClient.removeQueries();
@@ -24,24 +23,23 @@ const DocumentHeader = ({ wiki }: DocumentHeaderProps) => {
   };
 
   const goEditPage = () => {
-    navigate(URLS.EDIT, { state: wiki });
+    navigate(URLS.EDIT, { state: docs });
   };
 
   const goLogsPage = () => {
-    navigate(`${URLS.WIKI}/${wiki.title}/${URLS.LOGS}`, { state: wiki });
+    navigate(`${URLS.WIKI}/${docs.title}/${URLS.LOGS}`, { state: docs });
   };
 
   return (
-    <header className="max-md:flex-col-reverse max-md:gap-4 flex justify-between w-full">
-      <DocumentTitle title={wiki.title} />
-      <fieldset className="flex gap-2 max-md:hidden">
+    <div className="md:hidden">
+      <fieldset className="flex gap-2 max-md:w-full max-md:justify-center">
         <Button style="tertiary" size="xs" text="새로고침" onClick={refreshData} />
         <Button style="tertiary" size="xs" text="편집하기" onClick={goEditPage} />
         <Button style="tertiary" size="xs" text="편집로그" onClick={goLogsPage} />
         <Button style="primary" size="xs" text="작성하기" onClick={goPostPage} />
       </fieldset>
-    </header>
+    </div>
   );
 };
 
-export default DocumentHeader;
+export default MobileDocumentHeader;

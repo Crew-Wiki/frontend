@@ -1,15 +1,33 @@
 import React from 'react';
+import { WikiDocumentLogSummary } from '@type/DocumentType';
+import timeConverter from '@utils/TimeConverter';
+import { useNavigate } from 'react-router-dom';
+import URLS from '@constants/urls';
 import Button from './Button';
 
-const EachLogContent = () => {
+interface EachLogContentProps {
+  title: string;
+  summary: WikiDocumentLogSummary;
+}
+
+const EachLogContent = ({
+  title,
+  summary: { logId, writer, version, generateTime, documentBytes },
+}: EachLogContentProps) => {
+  const navigate = useNavigate();
+
+  const goLogDetail = () => {
+    navigate(`${URLS.WIKI}/${title}/log/${logId}`);
+  };
+
   return (
     <tr className="w-full font-pretendard text-xs">
-      <td className="w-10 text-center">7.</td>
-      <td className="text-center">2024년 1월 2일 (일) 23:20:36</td>
-      <td className="w-28 text-center">8192 byte</td>
-      <td className="w-16 text-center">토다리</td>
+      <td className="w-10 text-center">{version}</td>
+      <td className="text-center">{timeConverter(generateTime, 'YYYY년 M월 D일 (ddd) HH:mm:ss')}</td>
+      <td className="w-28 text-center">{`${documentBytes ?? 0}bytes`}</td>
+      <td className="w-16 text-center">{writer}</td>
       <td className="w-16 text-center">
-        <Button size="xs" style="text" text="조회" type="button" />
+        <Button size="xxs" style="text" text="조회" type="button" onClick={goLogDetail} />
       </td>
     </tr>
   );
