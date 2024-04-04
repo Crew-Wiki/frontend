@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-expressions */
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { ReactComponent as SearchCircle } from '@assets/image/search-circle-secondary.svg';
 import useInput from '@hooks/useInput';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,9 @@ const WikiInputField = ({ className }: WikiInputProps) => {
   const [value, setValue] = useInput<string>('');
   const navigate = useNavigate();
 
-  const onSubmit = () => {
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    // eslint-disable-next-line no-unused-expressions
     value.trim() === '' ? navigate('/') : navigate(`${URLS.WIKI}/${value}`);
     setValue('');
   };
