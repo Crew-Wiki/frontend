@@ -16,7 +16,9 @@ const WikiInputField = ({ className }: WikiInputProps) => {
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
     // eslint-disable-next-line no-unused-expressions
-    value.trim() === '' ? navigate('/') : navigate(`${URLS.WIKI}/${value}`);
+    if (value.trim() === '') return;
+
+    navigate(`${URLS.WIKI}/${value}`);
     setValue('');
   };
 
