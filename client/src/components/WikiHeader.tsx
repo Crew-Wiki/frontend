@@ -45,15 +45,12 @@ const WikiHeader = () => {
   }, [showHeader]);
 
   const [isVisibleSmallSearchBar, setVisibleSmallSearchBar] = useState(false);
-  const toggleVisibility = ()=>{
-          setVisibleSmallSearchBar(!isVisibleSmallSearchBar);};
- 
+  const toggleVisibility = () => {
+    setVisibleSmallSearchBar(!isVisibleSmallSearchBar);
+  };
+
   return (
-    <motion.div
-      className="sticky top-0 w-full bg-primary-primary "
-      animate={{ y }}
-      transition={{ duration: 0.3 }}
-    >
+    <motion.div className="sticky top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
       <div className="flex flex-col justify-center items-center gap-y-4 py-2">
         <div className="flex flex-row justify-between items-center px-4 header-container max-w-[1440px] w-full">
           <Link to="/" className="flex gap-2 items-center">
