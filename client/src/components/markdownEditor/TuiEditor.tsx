@@ -23,7 +23,7 @@ function TuiEditor({ content, editorRef, imageHandler, ...restProps }: Props) {
   return (
     <Editor
       initialValue={content ?? '내용을 입력해주세요'}
-      initialEditType="wysiwyg"
+      initialEditType="markdown"
       autofocus={false}
       previewStyle={isDesktop ? 'vertical' : 'tab'}
       ref={editorRef}
