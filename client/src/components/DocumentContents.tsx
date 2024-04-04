@@ -12,7 +12,7 @@ const DocumentContents = ({ contents }: DocumentContentsProps) => {
   const [headTags, setHeadTags] = useState<Element[]>([]);
   const getHeadTags = (viewer: any) => {
     const viewerText = viewer.options.el as HTMLElement;
-    setHeadTags(Array.from(viewerText.querySelectorAll('h1, h2, h3, h4, h5, h6')));
+    setHeadTags(Array.from(viewerText.querySelectorAll('h1, h2, h3')));
   };
 
   const location = useLocation();
