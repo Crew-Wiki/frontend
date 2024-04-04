@@ -2,11 +2,11 @@ import React from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import URLS from '@constants/urls';
 import { useNavigate } from 'react-router-dom';
-import { WikiDocument, WikiDocumentLogDetail } from '@type/DocumentType';
+import { WikiDocument } from '@type/DocumentType';
 import Button from './Button';
 
 interface MobileDocumentHeaderProps {
-  docs: WikiDocumentLogDetail | WikiDocument;
+  docs: WikiDocument;
 }
 
 const MobileDocumentHeader = ({ docs }: MobileDocumentHeaderProps) => {
