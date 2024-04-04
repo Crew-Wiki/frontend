@@ -16,7 +16,7 @@ const RecentlyEdit = () => {
         return (
           <Link
             key={`recently-${document.documentId}`}
-            className="px-2.5 py-2 font-pretendard font-normal text-xs border-b border-grayscale-100 last:border-0 text-grayscale-800"
+            className="px-2.5 py-2 font-pretendard font-normal border-b border-grayscale-100 last:border-0 text-grayscale-800"
             to={`${URLS.WIKI}/${document.title}`}
           >
             {`[${timeConverter(document.generateTime, 'YYYY.MM.DD')}] ${document.title}`}
