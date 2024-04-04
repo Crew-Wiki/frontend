@@ -80,7 +80,7 @@ const TOC = ({ headTags }: TOCProps) => {
             data-index={index}
             onClick={(event) => moveHeadTag(event)}
             key={index}
-            className={`font-normal text-sm text-grayscale-800 ${LEVEL_DEPTH[element.level]}`}
+            className={`font-normal text-sm text-grayscale-800 cursor-pointer ${LEVEL_DEPTH[element.level]}`}
           >
             <span data-index={index} onClick={(event) => moveHeadTag(event)} className="text-primary-primary">
               {tocNumber[index]}
