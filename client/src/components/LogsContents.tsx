@@ -28,8 +28,8 @@ const LogsContents = ({ title }: LogsContentsProps) => {
         </tr>
       </thead>
       <tbody>
-        {documentLogs.map((docs, index) => (
-          <EachLogContent key={index} index={documentLogs.length - index} documentLog={docs} />
+        {documentLogs.map((docs) => (
+          <EachLogContent key={docs.logId} title={title} summary={docs} />
         ))}
       </tbody>
     </table>

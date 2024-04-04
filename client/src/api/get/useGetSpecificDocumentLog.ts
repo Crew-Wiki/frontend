@@ -1,6 +1,6 @@
 import axiosInstance from '@utils/axios';
 import ENDPOINT from '@constants/endpoint';
-import { WikiDocumentLog } from '@type/DocumentType';
+import { WikiDocumentLogDetail } from '@type/DocumentType';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import KEYS from '@constants/keys';
 
@@ -9,7 +9,7 @@ const { QUERY } = KEYS;
 
 const useGetSpecificDocumentLog = (logId: number) => {
   const getSpecificDocumentLog = async () => {
-    const response = await axiosInstance.get<WikiDocumentLog>(GET_SPECIFIC_DOCUMENT_LOG(logId));
+    const response = await axiosInstance.get<WikiDocumentLogDetail>(GET_SPECIFIC_DOCUMENT_LOG(logId));
     return response.data;
   };
 
