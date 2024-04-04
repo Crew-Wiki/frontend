@@ -33,6 +33,7 @@ const usePutDocument = () => {
       queryClient.removeQueries({
         queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
       });
+      queryClient.invalidateQueries({ queryKey: [QUERY.GET_DOCUMENT_LOGS] });
       navigate(`${URLS.WIKI}/${response.data.title}`);
     },
   });
