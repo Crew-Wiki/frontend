@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { useLocation } from 'react-router-dom';
 import DocumentFallback from './DocumentFallback';
 
 interface DocumentWrapperProps {
@@ -8,8 +9,9 @@ interface DocumentWrapperProps {
 }
 
 const DocumentWrapper = ({ children, fallback }: DocumentWrapperProps) => {
+  const location = useLocation();
   return (
-    <ErrorBoundary FallbackComponent={fallback ?? DocumentFallback}>
+    <ErrorBoundary FallbackComponent={fallback ?? DocumentFallback} resetKeys={[location.pathname]}>
       <Suspense>{children}</Suspense>
     </ErrorBoundary>
   );
