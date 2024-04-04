@@ -3,14 +3,14 @@ import useNicknameInput from './useNicknameInput';
 import useTitleInput from './useTitleInput';
 
 const usePostPage = (defaultDocumentData?: WikiDocument) => {
-  const [title, setTitle, , titleErrorMessage, isAlreadyWritten] = useTitleInput(defaultDocumentData?.title ?? '');
-  const [nickname, setNickname, , errorMessage] = useNicknameInput(defaultDocumentData?.writer ?? '');
+  const [title, setTitle, , titleErrorMessage, checkIsAlreadyWritten] = useTitleInput(defaultDocumentData?.title ?? '');
+  const [nickname, setNickname, , errorMessage] = useNicknameInput('');
 
   const titleState = {
     title,
     setTitle,
     errorMessage: titleErrorMessage,
-    isAlreadyWritten,
+    checkIsAlreadyWritten,
   };
 
   const nicknameState = {
@@ -19,7 +19,10 @@ const usePostPage = (defaultDocumentData?: WikiDocument) => {
     errorMessage,
   };
 
-  return { titleState, nicknameState };
+  const isInputEmpty = titleState.title === '' || nicknameState.nickname === '';
+  const disabledSubmit = isInputEmpty || titleErrorMessage !== '';
+
+  return { titleState, nicknameState, disabledSubmit };
 };
 
 export default usePostPage;

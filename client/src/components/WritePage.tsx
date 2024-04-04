@@ -22,7 +22,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     window.history.back();
   }
   const editorRef = useRef<Editor | null>(null);
-  const { titleState, nicknameState } = usePostPage(defaultDocumentData);
+  const { titleState, nicknameState, disabledSubmit } = usePostPage(defaultDocumentData);
   const [images, setImages] = useState<UploadImageMeta[]>([]);
 
   const getMarkup = () => {
@@ -39,8 +39,6 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
 
     return newContents;
   };
-
-  const isInputEmpty = titleState.title === '' || nicknameState.nickname === '';
 
   const onClick = async () => {
     if (editorRef === null) return;
@@ -59,7 +57,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
   };
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
-      <PostHeader mode={mode} onClick={onClick} isPending={isPending} isInputEmpty={isInputEmpty} />
+      <PostHeader mode={mode} onClick={onClick} isPending={isPending} disabledSubmit={disabledSubmit} />
       <TitleInputField titleState={titleState} nicknameState={nicknameState} disabled={mode === 'edit'} />
       <PostContents editorRef={editorRef} initialValue={defaultDocumentData?.contents} setImages={setImages} />
     </div>
