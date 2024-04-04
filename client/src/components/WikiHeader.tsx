@@ -45,9 +45,12 @@ const WikiHeader = () => {
   }, [showHeader]);
 
   const [isVisibleSmallSearchBar, setVisibleSmallSearchBar] = useState(false);
+  const toggleVisibility = () => {
+    setVisibleSmallSearchBar(!isVisibleSmallSearchBar);
+  };
 
   return (
-    <motion.div className="fixed top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
+    <motion.div className="sticky top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
       <div className="flex flex-col justify-center items-center gap-y-4 py-2">
         <div className="flex flex-row justify-between items-center px-4 header-container max-w-[1440px] w-full">
           <Link to="/" className="flex gap-2 items-center">
@@ -58,7 +61,7 @@ const WikiHeader = () => {
           <div className="flex items-center">
             <RandomButton className="mr-4 cursor-pointer" />
             <WikiInputField className="w-20 md:w-[20.25rem] hidden md:flex" />
-            <SearchCircleSmall className="cursor-pointer md:hidden" onClick={() => setVisibleSmallSearchBar(true)} />
+            <SearchCircleSmall className="cursor-pointer md:hidden" onClick={toggleVisibility} />
           </div>
         </div>
         <div className={twMerge('flex items-center md:hidden', isVisibleSmallSearchBar ? '' : 'hidden')}>
