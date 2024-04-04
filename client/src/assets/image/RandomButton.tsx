@@ -1,11 +1,22 @@
 import React from 'react';
+import useGetRandomDocument from '@api/get/useGetRandomDocument';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
+import URLS from '@constants/urls';
 
 interface RandomButtonProps {
   className: string;
 }
 
 const RandomButton = ({ className }: RandomButtonProps) => {
+  const { getRandomDocument } = useGetRandomDocument();
+  const navigate = useNavigate();
+
+  const goRandomDocument = async () => {
+    const randomTitle = await getRandomDocument();
+    navigate(`${URLS.WIKI}/${randomTitle}`);
+  };
+
   const isMoreTablet = useMediaQuery({
     query: `(min-width:768px)`,
   });
@@ -18,6 +29,7 @@ const RandomButton = ({ className }: RandomButtonProps) => {
       viewBox="0 0 44 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={goRandomDocument}
     >
       <rect width="44" height="44" rx="12" fill="white" />
       <path
@@ -33,6 +45,7 @@ const RandomButton = ({ className }: RandomButtonProps) => {
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={goRandomDocument}
     >
       <rect width="36" height="36" rx="12" fill="white" />
       <path
