@@ -6,7 +6,7 @@ interface TitleInputFieldProps {
     title: string;
     setTitle: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
     errorMessage: string;
-    isAlreadyWritten: () => Promise<void>;
+    checkIsAlreadyWritten: () => Promise<void>;
   };
   nicknameState: {
     nickname: string;
@@ -40,7 +40,7 @@ const TitleInputField = ({ titleState, nicknameState, disabled }: TitleInputFiel
             onChange={titleState.setTitle}
             maxLength={12}
             disabled={disabled}
-            onBlur={titleState.isAlreadyWritten}
+            onBlur={titleState.checkIsAlreadyWritten}
           />
         </div>
         <div className="flex w-36 h-14 px-4 py-2.5 rounded-xl bg-white border-grayscale-200 border-solid border gap-2 max-[768px]:text-sm  max-[768px]:h-10">
