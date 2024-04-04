@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type ButtonStyle = 'primary' | 'secondary' | 'tertiary' | 'text';
@@ -27,7 +27,7 @@ const Button = ({ size, type, style, text, disabled, onClick }: ButtonProps) => 
       'bg-white text-primary-primary border-primary-primary border-solid border disabled:bg-grayscale-50 disabled:text-grayscale-400 disabled:border-grayscale-100 disabled:border-solid disabled:border active:bg-grayscale-100',
     tertiary:
       'bg-white text-grayscale-lightText border-grayscale-border border-solid border disabled:bg-grayscale-50 disabled:text-grayscale-400 disabled:border-grayscale-100 disabled:border-grayscale-border disabled:border-solid disabled:border active:bg-grayscale-100',
-    text: 'bg-white text-primary-primary shadow-md bg-grayscale-100 text-grayscale-400 shadow-md active:bg-grayscale-100',
+    text: 'bg-white text-primary-primary shadow-md disabled:bg-grayscale-100 disabled:text-grayscale-400 disabled:shadow-md active:bg-grayscale-100',
   };
 
   return (
