@@ -48,6 +48,7 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
   }
 
   const cleanup = () => {
+    mySessionStorage.remove([KEYS.SESSION_STORAGE.WRITE, title]);
     if (!timeoutId) return;
     clearTimeout(timeoutId);
   };
