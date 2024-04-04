@@ -6,8 +6,13 @@ const QUERY = {
   GET_SPECIFIC_DOCUMENT_LOG: 'get-specific-document-log',
 };
 
+const SESSION_STORAGE = {
+  WRITE: 'write-document',
+};
+
 const KEYS = {
   QUERY,
+  SESSION_STORAGE,
 };
 
 export default KEYS;

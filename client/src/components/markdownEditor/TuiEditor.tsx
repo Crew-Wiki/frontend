@@ -1,15 +1,15 @@
 import React from 'react';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, EditorProps } from '@toast-ui/react-editor';
 import '@toast-ui/editor/toastui-editor.css';
 import { log } from 'console';
 
 type HookCallback = (url: string, text?: string) => void;
 
-type Props = {
+interface Props extends EditorProps {
   editorRef: React.RefObject<Editor> | null;
   imageHandler: (blob: File | Blob, callback: HookCallback) => void;
   content?: string;
-};
+}
 
 const toolbar = [
   ['heading', 'bold', 'italic', 'strike'],
@@ -18,7 +18,7 @@ const toolbar = [
   ['scrollSync'],
 ];
 
-function TuiEditor({ content, editorRef, imageHandler }: Props) {
+function TuiEditor({ content, editorRef, imageHandler, ...restProps }: Props) {
   const isDesktop = window.innerWidth >= 768;
   return (
     <Editor
@@ -31,6 +31,7 @@ function TuiEditor({ content, editorRef, imageHandler }: Props) {
       hideModeSwitch={true}
       height="500px"
       hooks={{ addImageBlobHook: imageHandler }}
+      {...restProps}
     />
   );
 }
