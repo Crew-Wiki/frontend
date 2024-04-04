@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
@@ -35,6 +35,7 @@ const WikiHeader = () => {
     };
   }, [window.scrollY]);
 
+
   const ESTIMATED_HEADER_HEIGHT = 160;
   useEffect(() => {
     if (showHeader) {
@@ -45,9 +46,19 @@ const WikiHeader = () => {
   }, [showHeader]);
 
   const [isVisibleSmallSearchBar, setVisibleSmallSearchBar] = useState(false);
+
+  useEffect(() => {
+    const inputField = document.querySelector('#mobile-input-field') as HTMLInputElement
+    inputField?.focus();
+  }, [isVisibleSmallSearchBar])
+
   const toggleVisibility = () => {
     setVisibleSmallSearchBar(!isVisibleSmallSearchBar);
   };
+
+  const onSubmit = (e: FormEvent) => {
+    setVisibleSmallSearchBar(false);
+  }
 
   return (
     <motion.div className="sticky top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
@@ -60,12 +71,12 @@ const WikiHeader = () => {
 
           <div className="flex items-center">
             <RandomButton className="mr-4 cursor-pointer" />
-            <WikiInputField className="w-80 hidden md:flex" />
+            <WikiInputField className="w-80 hidden md:flex" handleSubmit={onSubmit} />
             <SearchCircleSmall className="cursor-pointer md:hidden" onClick={toggleVisibility} />
           </div>
         </div>
         <div className={twMerge('flex px-4 pt-4 pb-2 w-full items-center md:hidden', isVisibleSmallSearchBar ? '' : 'hidden')}>
-          <WikiInputField className="w-full" />
+          <WikiInputField id="mobile-input-field" className="w-full" handleSubmit={onSubmit} />
         </div>
       </div>
     </motion.div>
