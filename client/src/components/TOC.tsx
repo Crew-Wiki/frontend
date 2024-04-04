@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { MouseEvent } from 'react';
 
 interface TOCProps {
   headTags: Element[];
@@ -60,13 +63,28 @@ const TOC = ({ headTags }: TOCProps) => {
     tocList.push({ text, level, index: '' });
   });
 
+  const moveHeadTag = (event: MouseEvent<HTMLLIElement | HTMLSpanElement>) => {
+    if (!(event.target instanceof HTMLElement)) {
+      return;
+    }
+    const index = Number(event.target.dataset.index);
+    headTags[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   return (
     <aside className="flex flex-col gap-2 w-fit px-6 py-4 border rounded-xl border-grayscale-100">
       <h2 className="font-pretendard text-lg font-bold text-grayscale-800">목차</h2>
       <ul>
         {tocList.map((element, index) => (
-          <li key={index} className={`font-normal text-sm text-grayscale-800 ${LEVEL_DEPTH[element.level]}`}>
-            <span className="text-primary-primary">{tocNumber[index]}</span>
+          <li
+            data-index={index}
+            onClick={(event) => moveHeadTag(event)}
+            key={index}
+            className={`font-normal text-sm text-grayscale-800 ${LEVEL_DEPTH[element.level]}`}
+          >
+            <span data-index={index} onClick={(event) => moveHeadTag(event)} className="text-primary-primary">
+              {tocNumber[index]}
+            </span>
             {` ${element.text}`}
           </li>
         ))}

@@ -10,9 +10,18 @@ interface DocumentContentsProps {
 const DocumentContents = ({ contents }: DocumentContentsProps) => {
   const viewerRef = useRef<Viewer>(null);
   const [headTags, setHeadTags] = useState<Element[]>([]);
+
   const getHeadTags = (viewer: any) => {
     const viewerText = viewer.options.el as HTMLElement;
-    setHeadTags(Array.from(viewerText.querySelectorAll('h1, h2, h3')));
+    const headingTag = viewerText.querySelectorAll('h1, h2, h3');
+
+    headingTag.forEach((head, index) => {
+      if (head instanceof HTMLElement) {
+        head.dataset.index = `${index}`;
+      }
+    });
+
+    setHeadTags(Array.from(headingTag));
   };
 
   const location = useLocation();
