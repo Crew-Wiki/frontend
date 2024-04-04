@@ -1,8 +1,8 @@
 import KEYS from '@constants/keys';
 
-const SPLITTER = '//';
+const SPLITTER = '/';
 
-const sessionStorage = {
+const mySessionStorage = {
   get(keys: string[]) {
     return window.sessionStorage.getItem(keys.join(SPLITTER));
   },
@@ -22,4 +22,4 @@ const sessionStorage = {
   },
 };
 
-export default sessionStorage;
+export default mySessionStorage;

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Editor } from '@toast-ui/react-editor';
 import { UploadImageMeta } from '@type/DocumentType';
+import KEYS from '@constants/keys';
+import mySessionStorage from '@utils/sessionStorage';
 import TuiEditor from './markdownEditor/TuiEditor';
 
 type HookCallback = (url: string, text?: string) => void;
@@ -38,16 +40,7 @@ const PostContents = ({ editorRef, initialValue, setImages }: PostContentProps) 
   // 여기에 이미지를 찾아서 대체 -> createObjectURL
   return (
     // 기본 content 어떻게 주어줄 지
-    <TuiEditor
-      content={initialValue}
-      editorRef={editorRef}
-      imageHandler={imageHandler}
-      events={{
-        change: (e: 'markdown' | 'wysiwyg') => {
-          console.log('aaaa!!!!');
-        },
-      }}
-    />
+    <TuiEditor content={initialValue} editorRef={editorRef} imageHandler={imageHandler} />
   );
 };
 
