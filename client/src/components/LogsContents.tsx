@@ -11,23 +11,23 @@ const LogsContents = ({ title }: LogsContentsProps) => {
 
   return (
     <div className='flex flex-col w-full gap-4'>
-      <div className="flex w-full gap-2 font-pretendard text-md text-grayscale-800 md:gap-8">
-        <div className="w-10 items-center">
+      <div className="flex w-full gap-2 px-2 py-3 rounded-2xl bg-primary-50 font-pretendard text-md text-grayscale-800 md:gap-8">
+        <div className="w-10 ">
           <p className='w-full text-center font-bold'>
             버전
           </p>
         </div>
-        <div className='grow text-center items-center'>
+        <div className='grow'>
           <p className='w-full text-center font-bold'>
             생성일시
           </p>
         </div>
-        <div className="w-16 items-center">
+        <div className="w-16 ">
           <p className='w-full text-center font-bold'>
             문서 크기
           </p>
         </div>
-        <div className="w-16 items-center">
+        <div className="w-16 ">
           <p className='w-full text-center font-bold'>
             편집자
           </p>

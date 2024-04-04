@@ -28,7 +28,7 @@ const EachLogContent = ({
         </p>
       </div>
       <div className='grow text-center flex justify-center'>
-        <p className='w-[154px] text-center break-words md:w-full'>
+        <p className='w-[144px] text-center md:w-full'>
           {timeConverter(generateTime, 'YYYY년 M월 D일 (ddd) HH:mm:ss')}
         </p>
       </div>
