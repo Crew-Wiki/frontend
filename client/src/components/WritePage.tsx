@@ -36,7 +36,7 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
     };
   };
 
-  const MARKDOWN_THROTTLE_TIME = 500;
+  const MARKDOWN_THROTTLE_TIME = 5000;
 
   const saveMarkDown = () => {
     mySessionStorage.set([KEYS.SESSION_STORAGE.WRITE, title], getMarkDown() ?? '');
