@@ -35,7 +35,6 @@ const WikiHeader = () => {
     };
   }, [window.scrollY]);
 
-
   const ESTIMATED_HEADER_HEIGHT = 160;
   useEffect(() => {
     if (showHeader) {
@@ -48,9 +47,9 @@ const WikiHeader = () => {
   const [isVisibleSmallSearchBar, setVisibleSmallSearchBar] = useState(false);
 
   useEffect(() => {
-    const inputField = document.querySelector('#mobile-input-field') as HTMLInputElement
+    const inputField = document.querySelector('#mobile-input-field') as HTMLInputElement;
     inputField?.focus();
-  }, [isVisibleSmallSearchBar])
+  }, [isVisibleSmallSearchBar]);
 
   const toggleVisibility = () => {
     setVisibleSmallSearchBar(!isVisibleSmallSearchBar);
@@ -58,7 +57,7 @@ const WikiHeader = () => {
 
   const onSubmit = (e: FormEvent) => {
     setVisibleSmallSearchBar(false);
-  }
+  };
 
   return (
     <motion.div className="sticky top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
@@ -75,7 +74,12 @@ const WikiHeader = () => {
             <SearchCircleSmall className="cursor-pointer md:hidden" onClick={toggleVisibility} />
           </div>
         </div>
-        <div className={twMerge('flex px-4 pt-4 pb-2 w-full items-center md:hidden', isVisibleSmallSearchBar ? '' : 'hidden')}>
+        <div
+          className={twMerge(
+            'flex px-4 pt-4 pb-2 w-full items-center md:hidden',
+            isVisibleSmallSearchBar ? '' : 'hidden',
+          )}
+        >
           <WikiInputField id="mobile-input-field" className="w-full" handleSubmit={onSubmit} />
         </div>
       </div>
