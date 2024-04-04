@@ -1,5 +1,3 @@
-import KEYS from '@constants/keys';
-
 const SPLITTER = '/';
 
 const mySessionStorage = {

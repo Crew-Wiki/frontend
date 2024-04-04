@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Editor } from '@toast-ui/react-editor';
 import { UploadImageMeta } from '@type/DocumentType';
-import KEYS from '@constants/keys';
-import mySessionStorage from '@utils/sessionStorage';
 import TuiEditor from './markdownEditor/TuiEditor';
 
 type HookCallback = (url: string, text?: string) => void;

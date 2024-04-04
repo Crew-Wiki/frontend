@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import usePostPage from '@hooks/usePostPage';
 import { Editor } from '@toast-ui/react-editor';
 import { UseMutateFunction } from '@tanstack/react-query';
@@ -6,7 +6,7 @@ import { AxiosResponse } from 'axios';
 import { UploadImageMeta, WikiDocument, WriteDocumentContent } from '@type/DocumentType';
 import uploadImages from '@api/awsS3';
 import getBytes from '@utils/getBytes';
-import mySessionStorage from '@utils/sessionStorage';
+import mySessionStorage from '@utils/mySessionStorage';
 import KEYS from '@constants/keys';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
@@ -19,12 +19,9 @@ interface WritePageProps {
   defaultDocumentData?: WikiDocument;
 }
 
-const backupContent = (editorRef: React.MutableRefObject<Editor | null>, title: string) => {
+const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, title: string) => {
   const getMarkDown = () => {
-    if (editorRef.current === null) return '';
-    const editorInstance = editorRef.current.getInstance();
-    const contentMark = editorInstance.getMarkdown();
-    return contentMark;
+    return editorRef.current?.getInstance().getMarkdown();
   };
 
   const makeThrottle = (callback: () => void, throttleTime: number) => {
@@ -40,23 +37,24 @@ const backupContent = (editorRef: React.MutableRefObject<Editor | null>, title: 
     };
   };
 
-  const MARKDOWN_THROTTLE_TIME = 2000;
-  const getMarkDownThrottle = makeThrottle(() => {
-    mySessionStorage.set([KEYS.SESSION_STORAGE.WRITE, title], getMarkDown());
-  }, MARKDOWN_THROTTLE_TIME);
+  const MARKDOWN_THROTTLE_TIME = 5000;
+
+  const saveMarkDown = () => {
+    mySessionStorage.set([KEYS.SESSION_STORAGE.WRITE, title], getMarkDown() ?? '');
+  };
+  const saveMarkDownThrottle = makeThrottle(saveMarkDown, MARKDOWN_THROTTLE_TIME);
+
   if (editorRef.current !== null) {
-    editorRef.current.getInstance().addHook('change', () => {
-      getMarkDownThrottle();
-    });
+    editorRef.current.getInstance().addHook('change', saveMarkDownThrottle);
+  } else {
+    console.log('editorRef.current는 null');
   }
 };
 const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: WritePageProps) => {
   if (mode === 'edit' && defaultDocumentData === null) {
     window.history.back();
   }
-  const initialValue = mySessionStorage.has([KEYS.SESSION_STORAGE.WRITE])
-    ? (mySessionStorage.get([KEYS.SESSION_STORAGE.WRITE]) as string)
-    : defaultDocumentData?.contents;
+
   const editorRef = useRef<Editor | null>(null);
   const { titleState, nicknameState, disabledSubmit } = usePostPage(defaultDocumentData);
   const [images, setImages] = useState<UploadImageMeta[]>([]);
@@ -66,6 +64,9 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     const contentMark = editorInstance?.getMarkdown();
     return contentMark;
   };
+  const initialValue = mySessionStorage.has([KEYS.SESSION_STORAGE.WRITE, titleState.title])
+    ? (mySessionStorage.get([KEYS.SESSION_STORAGE.WRITE, titleState.title]) as string)
+    : defaultDocumentData?.contents;
 
   const replaceLocalUrlToS3Url = (contents: string, imageMetas: UploadImageMeta[]) => {
     let newContents = contents;
@@ -92,7 +93,7 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     writeDocument(context);
   };
 
-  backupContent(editorRef, titleState.title);
+  useEffect(() => attachBackupHandler(editorRef, titleState.title), []);
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
       <PostHeader mode={mode} onClick={onClick} isPending={isPending} disabledSubmit={disabledSubmit} />
