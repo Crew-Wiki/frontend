@@ -7,7 +7,6 @@ interface LogsContentsProps {
 }
 
 const LogsContents = ({ title }: LogsContentsProps) => {
-  // 아직 api가 미완성된듯...
   const { documentLogs } = useGetDocumentLogs(title);
 
   return (
