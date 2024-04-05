@@ -30,9 +30,8 @@ const DocumentFallback = ({ error }: FallbackProps) => {
           <Button style="primary" size="xs" text="작성하기" onClick={goPostPage} />
         </fieldset>
       </header>
-      <h1 className="font-bm text-2xl text-grayscale-800">{"존재하지 않는 문서에요."}</h1>
+      <h1 className="font-bm text-2xl text-grayscale-800">{'존재하지 않는 문서에요.'}</h1>
     </div>
-
   );
 };
 

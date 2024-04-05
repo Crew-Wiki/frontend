@@ -73,7 +73,12 @@ const TOC = ({ headTags }: TOCProps) => {
   };
 
   return (
-    <aside className={twMerge("flex flex-col gap-2 w-fit px-6 py-4 border rounded-xl border-grayscale-100", tocList.length === 0 ? "hidden" : '')}>
+    <aside
+      className={twMerge(
+        'flex flex-col gap-2 w-fit px-6 py-4 border rounded-xl border-grayscale-100',
+        tocList.length === 0 ? 'hidden' : '',
+      )}
+    >
       <h2 className="font-pretendard text-lg font-bold text-grayscale-800">목차</h2>
       <ul>
         {tocList.map((element, index) => (
