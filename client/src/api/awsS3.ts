@@ -23,9 +23,26 @@ const resizeFile = (file: File) =>
     Resizer.imageFileResizer(file, 1000, 1000, 'JPEG', 70, 0, (uri) => res(uri), 'file');
   });
 
+const changeDuplicatedName = (uploadImageMeats: UploadImageMeta[]) => {
+  const names: Record<string, number> = {};
+  const changedImageMetas = uploadImageMeats.map((imageMeta) => {
+    if (names[imageMeta.file.name] === 0) {
+      names[imageMeta.file.name] += 1;
+    } else {
+      names[imageMeta.file.name] = 0;
+    }
+    const newFile = new File(
+      [imageMeta.file],
+      `${names[imageMeta.file.name] ? names[imageMeta.file.name] : ''}${imageMeta.file.name}`,
+    );
+    return { ...imageMeta, file: newFile };
+  });
+  return changedImageMetas;
+};
+
 export default async function uploadImages(albumName: string, uploadImageMetas: UploadImageMeta[]) {
   const newMetas = await Promise.all(
-    uploadImageMetas.map(async (imageMeta) => {
+    changeDuplicatedName(uploadImageMetas).map(async (imageMeta) => {
       const resizedImage = (await resizeFile(imageMeta.file)) as File;
       const uploadImageKey = `${albumName}/${imageMeta.file.name}`;
 

@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { MouseEvent } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface TOCProps {
   headTags: Element[];
@@ -72,7 +73,12 @@ const TOC = ({ headTags }: TOCProps) => {
   };
 
   return (
-    <aside className="flex flex-col gap-2 w-fit px-6 py-4 border rounded-xl border-grayscale-100">
+    <aside
+      className={twMerge(
+        'flex flex-col gap-2 w-fit px-6 py-4 border rounded-xl border-grayscale-100',
+        tocList.length === 0 ? 'hidden' : '',
+      )}
+    >
       <h2 className="font-pretendard text-lg font-bold text-grayscale-800">목차</h2>
       <ul>
         {tocList.map((element, index) => (
@@ -80,7 +86,7 @@ const TOC = ({ headTags }: TOCProps) => {
             data-index={index}
             onClick={(event) => moveHeadTag(event)}
             key={index}
-            className={`font-normal text-sm text-grayscale-800 ${LEVEL_DEPTH[element.level]}`}
+            className={`font-normal text-sm text-grayscale-800 cursor-pointer ${LEVEL_DEPTH[element.level]}`}
           >
             <span data-index={index} onClick={(event) => moveHeadTag(event)} className="text-primary-primary">
               {tocNumber[index]}

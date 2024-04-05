@@ -11,8 +11,8 @@ interface EditLogsHeaderProps {
 const EditLogsHeader = ({ wiki }: EditLogsHeaderProps) => {
   const navigate = useNavigate();
 
-  const goPostPage = () => {
-    navigate(URLS.POST);
+  const goOriginPage = () => {
+    navigate(`${URLS.WIKI}/${wiki.title}`);
   };
 
   const goEditPage = () => {
@@ -21,10 +21,10 @@ const EditLogsHeader = ({ wiki }: EditLogsHeaderProps) => {
 
   return (
     <header className="flex justify-between w-full">
-      <h1 className="font-bm text-3xl text-greyscale-800">{`"${wiki.title}"의 편집로그`}</h1>
+      <h1 className="font-bm text-3xl text-grayscale-800">{`편집로그`}</h1>
       <fieldset className="flex gap-2">
-        <Button style="tertiary" size="xs" text="편집하기" onClick={goEditPage} />
-        <Button style="primary" size="xs" text="작성하기" onClick={goPostPage} />
+        <Button style="tertiary" size="xs" text="돌아가기" onClick={goOriginPage} />
+        <Button style="primary" size="xs" text="편집하기" onClick={goEditPage} />
       </fieldset>
     </header>
   );
