@@ -10,28 +10,35 @@ const LogsContents = ({ title }: LogsContentsProps) => {
   const { documentLogs } = useGetDocumentLogs(title);
 
   return (
-    <table className="border-separate border-spacing-y-6">
-      <thead>
-        <tr className="w-full font-bm text-sm">
-          <th scope="col" className="w-10">
+    <div className='flex flex-col w-full gap-4'>
+      <div className="flex w-full gap-2 px-2 py-3 rounded-2xl bg-primary-50 font-pretendard text-md text-grayscale-800 md:gap-8">
+        <div className="w-10 ">
+          <p className='w-full text-center font-bold'>
             버전
-          </th>
-          <th>생성일시</th>
-          <th scope="col" className="w-28">
+          </p>
+        </div>
+        <div className='grow'>
+          <p className='w-full text-center font-bold'>
+            생성일시
+          </p>
+        </div>
+        <div className="w-16 ">
+          <p className='w-full text-center font-bold'>
             문서 크기
-          </th>
-          <th scope="col" className="w-16">
+          </p>
+        </div>
+        <div className="w-16 ">
+          <p className='w-full text-center font-bold'>
             편집자
-          </th>
-          <th scope="col" className="w-16"></th>
-        </tr>
-      </thead>
-      <tbody>
+          </p>
+        </div>
+      </div>
+      <div className='flex flex-col gap-4'>
         {documentLogs.map((docs) => (
           <EachLogContent key={docs.logId} title={title} summary={docs} />
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 
