@@ -48,7 +48,6 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
   }
 
   const cleanup = () => {
-    mySessionStorage.remove([KEYS.SESSION_STORAGE.WRITE, title]);
     if (!timeoutId) return;
     clearTimeout(timeoutId);
   };
@@ -96,6 +95,8 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     };
 
     writeDocument(context);
+
+    mySessionStorage.remove([KEYS.SESSION_STORAGE.WRITE, titleState.title]);
   };
 
   useEffect(() => {
