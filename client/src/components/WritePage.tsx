@@ -24,14 +24,13 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
     return editorRef.current?.getInstance().getMarkdown();
   };
 
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
   const makeThrottle = (callback: () => void, throttleTime: number) => {
-    let isThrottle: boolean = false;
     return () => {
-      if (!isThrottle) {
-        isThrottle = true;
-        setTimeout(() => {
+      if (!timeoutId) {
+        timeoutId = setTimeout(() => {
           callback();
-          isThrottle = false;
+          timeoutId = null;
         }, throttleTime);
       }
     };
@@ -46,10 +45,16 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
 
   if (editorRef.current !== null) {
     editorRef.current.getInstance().addHook('change', saveMarkDownThrottle);
-  } else {
-    console.log('editorRef.current는 null');
   }
+
+  const cleanup = () => {
+    mySessionStorage.remove([KEYS.SESSION_STORAGE.WRITE, title]);
+    if (!timeoutId) return;
+    clearTimeout(timeoutId);
+  };
+  return cleanup;
 };
+
 const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: WritePageProps) => {
   if (mode === 'edit' && defaultDocumentData === null) {
     window.history.back();
@@ -93,7 +98,10 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
     writeDocument(context);
   };
 
-  useEffect(() => attachBackupHandler(editorRef, titleState.title), []);
+  useEffect(() => {
+    const cleanupFn = attachBackupHandler(editorRef, titleState.title);
+    return cleanupFn;
+  }, [editorRef, titleState.title]);
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
       <PostHeader mode={mode} onClick={onClick} isPending={isPending} disabledSubmit={disabledSubmit} />

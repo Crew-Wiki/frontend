@@ -18,6 +18,10 @@ const mySessionStorage = {
   has(keys: string[]) {
     return this.get(keys) !== null;
   },
+
+  remove(keys: string[]) {
+    window.sessionStorage.removeItem(keys.join(SPLITTER));
+  },
 };
 
 export default mySessionStorage;
