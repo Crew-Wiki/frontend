@@ -60,7 +60,7 @@ const WikiHeader = () => {
   };
 
   return (
-    <motion.div className="sticky top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
+    <motion.div className="sticky z-50 top-0 w-full bg-primary-primary " animate={{ y }} transition={{ duration: 0.3 }}>
       <div className="flex flex-col justify-center items-center py-2">
         <div className="flex flex-row justify-between items-center px-4 header-container max-w-[1440px] w-full">
           <Link to="/" className="flex gap-2 items-center">

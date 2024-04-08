@@ -20,31 +20,15 @@ const s3 = new AWS.S3({
 
 const resizeFile = (file: File) =>
   new Promise((res) => {
-    Resizer.imageFileResizer(file, 1000, 1000, 'JPEG', 70, 0, (uri) => res(uri), 'file');
+    Resizer.imageFileResizer(file, 640, 640, 'JPEG', 70, 0, (uri) => res(uri), 'file');
   });
-
-const changeDuplicatedName = (uploadImageMeats: UploadImageMeta[]) => {
-  const names: Record<string, number> = {};
-  const changedImageMetas = uploadImageMeats.map((imageMeta) => {
-    if (names[imageMeta.file.name] === 0) {
-      names[imageMeta.file.name] += 1;
-    } else {
-      names[imageMeta.file.name] = 0;
-    }
-    const newFile = new File(
-      [imageMeta.file],
-      `${names[imageMeta.file.name] ? names[imageMeta.file.name] : ''}${imageMeta.file.name}`,
-    );
-    return { ...imageMeta, file: newFile };
-  });
-  return changedImageMetas;
-};
 
 export default async function uploadImages(albumName: string, uploadImageMetas: UploadImageMeta[]) {
   const newMetas = await Promise.all(
-    changeDuplicatedName(uploadImageMetas).map(async (imageMeta) => {
+    uploadImageMetas.map(async (imageMeta) => {
+      const randomFileName = Math.random().toString(36).substr(2, 11);
       const resizedImage = (await resizeFile(imageMeta.file)) as File;
-      const uploadImageKey = `${albumName}/${imageMeta.file.name}`;
+      const uploadImageKey = `${albumName}/${randomFileName}`;
 
       const upload = s3.upload({
         ACL: 'public-read',

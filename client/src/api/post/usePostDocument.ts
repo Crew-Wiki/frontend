@@ -52,6 +52,9 @@ const usePostDocument = () => {
       queryClient.removeQueries({
         queryKey: [QUERY.GET_RECENTLY_DOCUMENTS],
       });
+      queryClient.removeQueries({
+        queryKey: [QUERY.GET_DOCUMENT_BY_TITLE, response.data.title],
+      });
 
       navigate(`${URLS.WIKI}/${response.data.title}`);
     },
