@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
 import DocumentHeader from './DocumentHeader';
 import DocumentContents from './DocumentContents';
@@ -13,14 +13,6 @@ interface DocumentPageProps {
 const DocumentPage = ({ daemoon }: DocumentPageProps) => {
   const { title } = useParams();
   const { docs } = useGetDocumentByTitle(title ?? daemoon ?? '');
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (daemoon !== undefined && title === undefined) {
-      navigate(daemoon);
-    }
-  }, [daemoon]);
 
   return (
     <>
