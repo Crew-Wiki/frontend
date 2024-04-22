@@ -1,15 +1,15 @@
 import React from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import WritePage from '@components/WritePage';
+import WritePage from '@components/write/WritePage';
 import usePostDocument from '@api/post/usePostDocument';
 import usePutDocument from '@api/put/usePutDocument';
 import { WikiDocument } from '@type/DocumentType';
-import EditLogs from '@components/EditLogs';
+import EditLogs from '@components/logs/EditLogs';
 import Layout from '@components/Layout/Layout';
 import URLS from '@constants/urls';
-import DocumentWrapper from '@components/DocumentWrapper';
-import DocumentPage from '@components/DocumentPage';
-import LogContent from '@components/LogContent';
+import DocumentWrapper from '@components/common/DocumentWrapper';
+import DocumentPage from '@components/document/DocumentPage';
+import LogContent from '@components/logs/LogContent';
 
 const Router = () => {
   return (

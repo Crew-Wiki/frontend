@@ -2,10 +2,10 @@ import React from 'react';
 import useGetSpecificDocumentLog from '@api/get/useGetSpecificDocumentLog';
 import { useParams } from 'react-router-dom';
 import useGetDocumentByTitle from '@api/get/useGetDocumentByTitle';
-import DocumentHeader from './DocumentHeader';
-import DocumentContents from './DocumentContents';
-import DocumentFooter from './DocumentFooter';
-import MobileDocumentHeader from './MobileDocumentHeader';
+import DocumentHeader from '../document/DocumentHeader';
+import DocumentContents from '../document/DocumentContents';
+import DocumentFooter from '../document/DocumentFooter';
+import MobileDocumentHeader from '../document/MobileDocumentHeader';
 
 const LogContent = () => {
   const { logId } = useParams();

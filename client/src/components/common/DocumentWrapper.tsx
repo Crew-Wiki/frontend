@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { useLocation } from 'react-router-dom';
-import DocumentFallback from './DocumentFallback';
+import DocumentFallback from '../document/DocumentFallback';
 
 interface DocumentWrapperProps {
   fallback?: ({ error }: FallbackProps) => React.JSX.Element;

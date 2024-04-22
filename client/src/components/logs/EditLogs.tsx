@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { WikiDocument } from '@type/DocumentType';
-import DocumentFooter from './DocumentFooter';
+import DocumentFooter from '../document/DocumentFooter';
 import EditLogsHeader from './EditLogsHeader';
 import LogsContents from './LogsContents';
 

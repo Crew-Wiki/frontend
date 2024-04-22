@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
 import { WikiDocument } from '@type/DocumentType';
-import Button from './Button';
+import Button from '../common/Button';
 
 interface EditLogsHeaderProps {
   wiki: WikiDocument;
