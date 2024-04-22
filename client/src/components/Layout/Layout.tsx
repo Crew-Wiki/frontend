@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import DocumentWrapper from '@components/common/DocumentWrapper';
+import DocumentWrapper from '@components/common/DocumentBoundary';
 import RecentlyEdit from '@components/recentlyEdit/RecentlyEdit';
 import RecentlyEditFallback from '@components/recentlyEdit/RecentlyEditFallback';
 import FloatingButton from '@components/common/FloatingButton';

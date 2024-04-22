@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import EditLogs from '@components/logs/EditLogs';
 import URLS from '@constants/urls';
-import DocumentWrapper from '@components/common/DocumentWrapper';
+import DocumentBoundary from '@components/common/DocumentBoundary';
 import DocumentPage from '@components/document/DocumentPage';
 import LogContent from '@components/logs/LogContent';
 import WritePage from '@components/write/WritePage';
@@ -20,9 +20,9 @@ const router = createBrowserRouter([
       {
         path: `${URLS.WIKI}/${URLS.DOCS}`,
         element: (
-          <DocumentWrapper>
+          <DocumentBoundary>
             <DocumentPage />
-          </DocumentWrapper>
+          </DocumentBoundary>
         ),
       },
       {
@@ -32,9 +32,9 @@ const router = createBrowserRouter([
       {
         path: `${URLS.WIKI}/${URLS.DOCS}/${URLS.SPECIFIC_LOG}`,
         element: (
-          <DocumentWrapper>
+          <DocumentBoundary>
             <LogContent />
-          </DocumentWrapper>
+          </DocumentBoundary>
         ),
       },
       { path: URLS.POST, element: <WritePage mode="add" /> },
