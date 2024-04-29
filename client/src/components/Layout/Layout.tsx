@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import DocumentWrapper from '@components/DocumentWrapper';
-import RecentlyEdit from '@components/RecentlyEdit';
-import RecentlyEditFallback from '@components/RecentlyEditFallback';
-import FloatingButton from '@assets/image/FloatingButton';
-import WikiHeader from '../WikiHeader';
+import DocumentWrapper from '@components/common/DocumentBoundary';
+import RecentlyEdit from '@components/recentlyEdit/RecentlyEdit';
+import RecentlyEditFallback from '@components/recentlyEdit/RecentlyEditFallback';
+import FloatingButton from '@components/common/FloatingButton';
+import WikiHeader from './WikiHeader';
 
 const Layout = () => {
   return (

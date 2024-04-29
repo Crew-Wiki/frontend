@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Editor } from '@toast-ui/react-editor';
 import { UploadImageMeta } from '@type/DocumentType';
-import TuiEditor from './markdownEditor/TuiEditor';
+import TuiEditor from '../markdownEditor/TuiEditor';
 
 type HookCallback = (url: string, text?: string) => void;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import DocumentTitle from './DocumentTitle';
-import Button from './Button';
+import DocumentTitle from '../common/DocumentTitle';
+import Button from '../common/Button';
 
 interface PostHeaderProps {
   mode: 'add' | 'edit';

@@ -1,14 +1,13 @@
 import React, { Suspense } from 'react';
 import { WikiDocument } from '@type/DocumentType';
-import DocumentFooter from './DocumentFooter';
+import { useLocation } from 'react-router-dom';
+import DocumentFooter from '../document/DocumentFooter';
 import EditLogsHeader from './EditLogsHeader';
 import LogsContents from './LogsContents';
 
-interface EditLogsProps {
-  defaultDocumentData: WikiDocument;
-}
+const EditLogs = () => {
+  const defaultDocumentData = useLocation().state as WikiDocument;
 
-const EditLogs = ({ defaultDocumentData }: EditLogsProps) => {
   if (defaultDocumentData === null) {
     window.history.back();
   }

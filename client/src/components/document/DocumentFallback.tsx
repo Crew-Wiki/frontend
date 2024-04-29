@@ -4,8 +4,8 @@ import { AxiosError } from 'axios';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate, useParams } from 'react-router-dom';
 import URLS from '@constants/urls';
-import DocumentTitle from './DocumentTitle';
-import Button from './Button';
+import DocumentTitle from '../common/DocumentTitle';
+import Button from '../common/Button';
 
 interface Error {
   errorMessage: string;

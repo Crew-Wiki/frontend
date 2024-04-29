@@ -3,7 +3,6 @@ import { WikiDocumentLogSummary } from '@type/DocumentType';
 import timeConverter from '@utils/TimeConverter';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
-import Button from './Button';
 
 interface EachLogContentProps {
   title: string;
@@ -40,16 +39,6 @@ const EachLogContent = ({
         <p className="w-full text-center">{writer}</p>
       </div>
     </button>
-
-    // <div className="w-full font-pretendard text-xs border border-secondary-secondary border-solid bg-grayscale-50">
-    //   <td className="w-10 text-center">{version}</td>
-    //   <td className="text-center">{timeConverter(generateTime, 'YYYY년 M월 D일 (ddd) HH:mm:ss')}</td>
-    //   <td className="w-28 text-center">{`${documentBytes ?? 0}bytes`}</td>
-    //   <td className="w-16 text-center">{writer}</td>
-    // <td className="w-16 text-center">
-    //   <Button size="xxs" style="text" text="조회" type="button" onClick={goLogDetail} />
-    // </td>
-    // </div>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import PersistGate from './PersistGate';
-import App from './App';
 import './index.css';
+import router from './Router';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,9 +30,7 @@ root.render(
   <React.StrictMode>
     <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
       <PersistGate fallback={null}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <RouterProvider router={router} />
       </PersistGate>
       <ReactQueryDevtools />
     </PersistQueryClientProvider>
