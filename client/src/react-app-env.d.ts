@@ -14,6 +14,8 @@ declare namespace NodeJS {
     REACT_APP_TEST_BUCKET_REGION: 'string';
     REACT_APP_TEST_ACCESS_KEY: 'string';
     REACT_APP_TEST_SECRET_KEY: 'string';
+
+    REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID: 'string';
   }
 }
 
