@@ -1,11 +1,11 @@
-import React, { useState, useEffect, FormEvent, useRef } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
 import LogoImage from '@assets/image/hangseong-white.png';
-import RandomButton from '@assets/image/RandomButton';
+import RandomButton from '@components/common/RandomButton';
 import { twMerge } from 'tailwind-merge';
-import WikiInputField from './WikiInputField';
+import WikiInputField from '../write/WikiInputField';
 
 interface ScrollPosition {
   prev: number;

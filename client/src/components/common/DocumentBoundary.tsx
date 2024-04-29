@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { useLocation } from 'react-router-dom';
-import DocumentFallback from './DocumentFallback';
+import DocumentFallback from '../document/DocumentFallback';
 
-interface DocumentWrapperProps {
+interface DocumentBoundaryProps {
   fallback?: ({ error }: FallbackProps) => React.JSX.Element;
   children?: React.JSX.Element;
 }
 
-const DocumentWrapper = ({ children, fallback }: DocumentWrapperProps) => {
+const DocumentBoundary = ({ children, fallback }: DocumentBoundaryProps) => {
   const location = useLocation();
   return (
     <ErrorBoundary FallbackComponent={fallback ?? DocumentFallback} resetKeys={[location.pathname]}>
@@ -17,4 +17,4 @@ const DocumentWrapper = ({ children, fallback }: DocumentWrapperProps) => {
   );
 };
 
-export default DocumentWrapper;
+export default DocumentBoundary;

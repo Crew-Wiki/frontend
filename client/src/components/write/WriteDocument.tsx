@@ -54,7 +54,7 @@ const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, t
   return cleanup;
 };
 
-const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: WritePageProps) => {
+const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: WritePageProps) => {
   if (mode === 'edit' && defaultDocumentData === null) {
     window.history.back();
   }
@@ -112,4 +112,4 @@ const WritePage = ({ mode, writeDocument, isPending, defaultDocumentData }: Writ
   );
 };
 
-export default WritePage;
+export default WriteDocument;

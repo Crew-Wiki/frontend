@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Router from './Router';
+import Layout from '@components/Layout/Layout';
 
 const App = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ const App = () => {
     window.scrollTo({ top: 0 });
   }, [location.pathname]);
 
-  return <Router />;
+  return <Layout />;
 };
 
 export default App;
