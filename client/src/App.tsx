@@ -5,7 +5,7 @@ import useRouteChangeTracker from '@hooks/useRouteChangeTracker';
 
 const App = () => {
   const location = useLocation();
-  useRouteChangeTracker();
+  // useRouteChangeTracker();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
