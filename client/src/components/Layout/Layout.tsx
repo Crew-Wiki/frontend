@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import DocumentWrapper from '@components/common/DocumentBoundary';
 import RecentlyEdit from '@components/recentlyEdit/RecentlyEdit';
 import RecentlyEditFallback from '@components/recentlyEdit/RecentlyEditFallback';
 import FloatingButton from '@components/common/FloatingButton';
-import WikiHeader from './WikiHeader';
+import DocumentBoundary from '@components/common/DocumentBoundary';
+import WikiHeader from '../header/WikiHeader';
 
 const Layout = () => {
   return (
@@ -15,9 +15,9 @@ const Layout = () => {
           <div className="flex flex-col gap-6 w-full max-[768px]:gap-2">
             <Outlet />
           </div>
-          <DocumentWrapper fallback={RecentlyEditFallback}>
+          <DocumentBoundary fallback={RecentlyEditFallback}>
             <RecentlyEdit />
-          </DocumentWrapper>
+          </DocumentBoundary>
         </main>
       </div>
       <FloatingButton />
