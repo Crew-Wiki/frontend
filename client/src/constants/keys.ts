@@ -4,6 +4,7 @@ const QUERY = {
   GET_RECENTLY_DOCUMENTS: 'get-recently-documents',
   GET_DOCUMENT_LOGS: 'get-document-logs',
   GET_SPECIFIC_DOCUMENT_LOG: 'get-specific-document-log',
+  GET_DOCUMENT_SEARCH: 'get-document-search',
 };
 
 const SESSION_STORAGE = {
