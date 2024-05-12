@@ -28,7 +28,7 @@ export default async function uploadImages(albumName: string, uploadImageMetas: 
     uploadImageMetas.map(async (imageMeta) => {
       const randomFileName = Math.random().toString(36).substr(2, 11);
       const resizedImage = (await resizeFile(imageMeta.file)) as File;
-      const uploadImageKey = `${albumName}/${randomFileName}`;
+      const uploadImageKey = `${albumName}/${randomFileName}.jpg`;
 
       const upload = s3.upload({
         ACL: 'public-read',
