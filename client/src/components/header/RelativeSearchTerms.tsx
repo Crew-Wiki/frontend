@@ -15,7 +15,7 @@ const RelativeSearchTerms = ({ searchTerms, onSubmit }: RelativeSearchTermsProps
               onClick={(event) => {
                 onSubmit(event, search);
               }}
-              className="w-full px-2 py-2 hover:bg-primary-50 rounded-lg cursor-pointer text-left"
+              className="w-full px-2 py-2 hover:bg-primary-50 rounded-lg cursor-pointer text-left font-pretendard text-base font-normal text-grayscale-800"
               key={index}
             >
               {search}
