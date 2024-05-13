@@ -21,7 +21,7 @@ const EachLogContent = ({
 
   return (
     <button
-      className="flex items-center justify-center w-full gap-2 px-2 py-4 border border-secondary-100 rounded-2xl font-pretendard text-md  text-grayscale-800 md:gap-8"
+      className="flex items-center justify-center w-full gap-2 px-2 py-4 border border-primary-100 rounded-2xl font-pretendard text-md  text-grayscale-800 md:gap-8"
       onClick={goLogDetail}
     >
       <div className="w-10">
