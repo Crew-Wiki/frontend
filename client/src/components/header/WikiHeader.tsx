@@ -5,7 +5,7 @@ import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle
 import LogoImage from '@assets/image/hangseong-white.png';
 import RandomButton from '@components/common/RandomButton';
 import { twMerge } from 'tailwind-merge';
-import WikiInputField from '../write/WikiInputField';
+import WikiInputField from './WikiInputField';
 
 interface ScrollPosition {
   prev: number;
