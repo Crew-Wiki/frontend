@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ReactComponent as SearchCircleSmall } from '@assets/image/search-circle.svg';
+import SearchCircleSmall from '@assets/image/search-circle.svg';
 import LogoImage from '@assets/image/hangseong-white.png';
 import RandomButton from '@components/common/RandomButton';
 import { twMerge } from 'tailwind-merge';
@@ -71,7 +73,7 @@ const WikiHeader = () => {
           <div className="flex items-center">
             <RandomButton className="mr-4 cursor-pointer" />
             <WikiInputField className="w-80 hidden md:flex" handleSubmit={onSubmit} />
-            <SearchCircleSmall className="cursor-pointer md:hidden" onClick={toggleVisibility} />
+            <img src={SearchCircleSmall} alt="search" className="cursor-pointer md:hidden" onClick={toggleVisibility} />
           </div>
         </div>
         <div
