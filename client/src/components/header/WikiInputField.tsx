@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ReactComponent as SearchCircle } from '@assets/image/search-circle-secondary.svg';
+import SearchCircle from '@assets/image/search-circle-secondary.svg';
 import useInput from '@hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
@@ -61,7 +61,7 @@ const WikiInputField = ({ id, className, handleSubmit }: WikiInputProps) => {
         onChange={setValue}
       />
       <button>
-        <SearchCircle className="cursor-pointer max-[768px]:hidden" />
+        <img className="cursor-pointer max-[768px]:hidden" src={SearchCircle} alt="search" />
       </button>
       {value.trim() !== '' && <RelativeSearchTerms searchTerms={titles ?? []} onSubmit={onSubmit} />}
     </form>

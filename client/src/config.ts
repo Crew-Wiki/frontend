@@ -1,3 +1,3 @@
-const BASE_URL = process.env.REACT_APP_SERVER;
+const BASE_URL = import.meta.env.VITE_SERVER;
 
 export default BASE_URL;

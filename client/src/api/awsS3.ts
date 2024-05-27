@@ -2,10 +2,10 @@ import { UploadImageMeta } from '@type/DocumentType';
 import Resizer from 'react-image-file-resizer';
 import AWS from 'aws-sdk';
 
-const bucketName = process.env.REACT_APP_BUCKET_NAME;
-const region = process.env.REACT_APP_BUCKET_REGION;
-const accessKeyId = process.env.REACT_APP_ACCESS_KEY;
-const secretAccessKey = process.env.REACT_APP_SECRET_KEY;
+const bucketName = import.meta.env.VITE_BUCKET_NAME;
+const region = import.meta.env.VITE_BUCKET_REGION;
+const accessKeyId = import.meta.env.VITE_ACCESS_KEY;
+const secretAccessKey = import.meta.env.VITE_SECRET_KEY;
 
 AWS.config.update({
   region,
