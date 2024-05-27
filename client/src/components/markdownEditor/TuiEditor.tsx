@@ -1,7 +1,6 @@
 import React from 'react';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import '@toast-ui/editor/toastui-editor.css';
-import { log } from 'console';
 
 type HookCallback = (url: string, text?: string) => void;
 
