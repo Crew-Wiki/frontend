@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         path: URLS.EDIT,
         element: <WritePage mode="edit" />,
       },
-      { path: '*', element: <Navigate to="/" /> },
+      { path: '/*', element: <Navigate to="/" /> },
     ],
   },
 ]);
