@@ -34,7 +34,6 @@ export default defineConfig({
     ],
   },
   build: {
-    sourcemap: true,
     commonjsOptions: {
       include: [/node_modules/], // 번들에 포함시킬 모듈의 경로
       extensions: ['.js', '.cjs'], // CommonJS 모듈로 간주할 파일의 확장자
