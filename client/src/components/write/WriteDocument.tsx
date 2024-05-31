@@ -11,6 +11,7 @@ import KEYS from '@constants/keys';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
 import PostContents from './PostContents';
+import useThrottle from './useThrottle';
 
 interface WritePageProps {
   mode: 'add' | 'edit';
@@ -19,39 +20,8 @@ interface WritePageProps {
   defaultDocumentData?: WikiDocument;
 }
 
-const attachBackupHandler = (editorRef: React.MutableRefObject<Editor | null>, title: string) => {
-  const getMarkDown = () => {
-    return editorRef.current?.getInstance().getMarkdown();
-  };
-
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  const makeThrottle = (callback: () => void, throttleTime: number) => {
-    return () => {
-      if (!timeoutId) {
-        timeoutId = setTimeout(() => {
-          callback();
-          timeoutId = null;
-        }, throttleTime);
-      }
-    };
-  };
-
-  const MARKDOWN_THROTTLE_TIME = 5000;
-
-  const saveMarkDown = () => {
-    mySessionStorage.set([KEYS.SESSION_STORAGE.WRITE, title], getMarkDown() ?? '');
-  };
-  const saveMarkDownThrottle = makeThrottle(saveMarkDown, MARKDOWN_THROTTLE_TIME);
-
-  if (editorRef.current !== null) {
-    editorRef.current.getInstance().addHook('change', saveMarkDownThrottle);
-  }
-
-  const cleanup = () => {
-    if (!timeoutId) return;
-    clearTimeout(timeoutId);
-  };
-  return cleanup;
+const getMarkDown = (editorRef: React.MutableRefObject<Editor | null>) => {
+  return editorRef.current?.getInstance().getMarkdown();
 };
 
 const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: WritePageProps) => {
@@ -59,6 +29,7 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
     window.history.back();
   }
 
+  const { makeThrottle, cleanup } = useThrottle();
   const editorRef = useRef<Editor | null>(null);
   const { titleState, nicknameState, disabledSubmit } = usePostPage(defaultDocumentData);
   const [images, setImages] = useState<UploadImageMeta[]>([]);
@@ -68,10 +39,6 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
     const contentMark = editorInstance?.getMarkdown();
     return contentMark;
   };
-  const initialValue = mySessionStorage.has([KEYS.SESSION_STORAGE.WRITE, titleState.title])
-    ? (mySessionStorage.get([KEYS.SESSION_STORAGE.WRITE, titleState.title]) as string)
-    : defaultDocumentData?.contents;
-
   const replaceLocalUrlToS3Url = (contents: string, imageMetas: UploadImageMeta[]) => {
     let newContents = contents;
     imageMetas.forEach(({ objectURL, s3URL }) => {
@@ -80,8 +47,7 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
 
     return newContents;
   };
-
-  const onClick = async () => {
+  const onClickSubmit = async () => {
     if (editorRef === null) return;
 
     const newMetas = await uploadImages(titleState.title, images);
@@ -99,13 +65,60 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
     mySessionStorage.remove([KEYS.SESSION_STORAGE.WRITE, titleState.title]);
   };
 
+  const initialValue = mySessionStorage.has([KEYS.SESSION_STORAGE.WRITE, titleState.title])
+    ? (mySessionStorage.get([KEYS.SESSION_STORAGE.WRITE, titleState.title]) as string)
+    : defaultDocumentData?.contents;
+
+  useEffect(
+    function attachBackupHandler() {
+      const MARKDOWN_THROTTLE_TIME = 5000;
+
+      const saveMarkDown = () => {
+        mySessionStorage.set([KEYS.SESSION_STORAGE.WRITE, titleState.title], getMarkDown(editorRef) ?? '');
+      };
+      const saveMarkDownThrottle = makeThrottle(saveMarkDown, MARKDOWN_THROTTLE_TIME);
+
+      if (editorRef.current !== null) {
+        editorRef.current.getInstance().addHook('change', saveMarkDownThrottle);
+      }
+      return cleanup;
+    },
+    [editorRef, titleState.title],
+  );
+
+  const [refStartPose, setRefStartPose] = useState<[number, number] | null>(null);
+
   useEffect(() => {
-    const cleanupFn = attachBackupHandler(editorRef, titleState.title);
-    return cleanupFn;
-  }, [editorRef, titleState.title]);
+    const recordRefStartPose = () => {
+      if (!editorRef.current) return;
+      const startPose = editorRef.current.getInstance().getSelection()[0] as [number, number];
+      const letter = editorRef.current.getInstance().getSelectedText([startPose[0], startPose[1] - 1], startPose);
+      if (letter === ' ') {
+        setRefStartPose(null);
+        return;
+      }
+      if (letter !== '@') return;
+      setRefStartPose(startPose);
+    };
+
+    const recordRefEndPose = () => {
+      if (!editorRef.current) return;
+      if (!refStartPose) return;
+      const refEndPose = editorRef.current.getInstance().getSelection()[1];
+      const text = editorRef.current.getInstance().getSelectedText(refStartPose, refEndPose);
+      console.log('refEndPose  기록됨 : ', text);
+    };
+    if (editorRef.current !== null) {
+      editorRef.current.getInstance().addHook('change', () => {
+        recordRefStartPose();
+        recordRefEndPose();
+      });
+    }
+  }, [editorRef.current, refStartPose, titleState.title]);
+
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
-      <PostHeader mode={mode} onClick={onClick} isPending={isPending} disabledSubmit={disabledSubmit} />
+      <PostHeader mode={mode} onClickSubmit={onClickSubmit} isPending={isPending} disabledSubmit={disabledSubmit} />
       <TitleInputField titleState={titleState} nicknameState={nicknameState} disabled={mode === 'edit'} />
       <PostContents editorRef={editorRef} initialValue={initialValue} setImages={setImages} />
     </div>
