@@ -10,6 +10,7 @@ import mySessionStorage from '@utils/mySessionStorage';
 import KEYS from '@constants/keys';
 import useSearchDocumentByQuery from '@hooks/useSearchDocumentByQuery';
 import RelativeSearchTerms from '@components/header/RelativeSearchTerms';
+import { createPortal } from 'react-dom';
 import PostHeader from './PostHeader';
 import TitleInputField from './TitleInputField';
 import PostContents from './PostContents';
@@ -102,10 +103,28 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
 
   const { titles } = useSearchDocumentByQuery(referQuery);
   const floatingArea = document.createElement('div');
-  floatingArea.id = 'floating-area';
   floatingArea.style.width = '320px';
   floatingArea.style.height = '100px';
+  floatingArea.id = 'floating-area';
   floatingArea.style.position = 'relative';
+
+  const [floatingAreaPosition, setFloatingAreaPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+
+  const getFloatingArea = () => {
+    const floatingAreaDom = document.querySelector('#floating-area');
+    const css = floatingAreaDom?.getAttribute('style');
+    if (!css) return null;
+    const topRegex = /top:\s*([\d.]+)px/;
+    const leftRegex = /left:\s*([\d.]+)px/;
+
+    const topMatch = css.match(topRegex);
+    const leftMatch = css.match(leftRegex);
+
+    if (topMatch && leftMatch) {
+      setFloatingAreaPosition({ top: Number(topMatch[1]), left: Number(leftMatch[1]) });
+    }
+    return null;
+  };
 
   useEffect(() => {
     const recordRefStartPos = () => {
@@ -117,6 +136,8 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
         return;
       }
       if (letter !== '@') return;
+      editorRef.current?.getInstance().addWidget(floatingArea, 'bottom', currentPos!);
+      getFloatingArea();
       setRefStartPos(currentPos);
     };
 
@@ -128,28 +149,27 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
       const text = editorRef.current.getInstance().getSelectedText(refStartPos, currentPos);
       setReferQuery(text);
     };
+
     if (editorRef.current !== null) {
       editorRef.current.getInstance().addHook('change', () => {
         recordRefStartPos();
         recordRefEndPose();
       });
     }
-  }, [editorRef.current, refStartPos, titleState.title]);
-  // editorRef.current?.getInstance().addWidget(floatingArea, 'bottom', refEndPos!);
-
-  const floatingAreaTop = `${Number(floatingArea.style.top.slice(0, -2)) + window.scrollY + 36}px`;
-  const floatingAreaLeft = floatingArea.style.left;
+  }, [editorRef.current, refStartPos]);
 
   return (
     <div className="flex flex-col gap-6 w-full h-fit bg-white border-primary-100 border-solid border rounded-xl p-8 max-[768px]:p-4 max-[768px]:gap-3">
       <PostHeader mode={mode} onClickSubmit={onClickSubmit} isPending={isPending} disabledSubmit={disabledSubmit} />
       <TitleInputField titleState={titleState} nicknameState={nicknameState} disabled={mode === 'edit'} />
       <PostContents editorRef={editorRef} initialValue={initialValue} setImages={setImages} />
-      <RelativeSearchTerms
-        style={{ top: floatingAreaTop, left: floatingAreaLeft, width: 320 }}
-        searchTerms={titles ?? []}
-        onClick={onClick}
-      />
+      {
+        <RelativeSearchTerms
+          style={{ top: `${floatingAreaPosition.top + 200}px`, left: floatingAreaPosition.left, width: 320 }}
+          searchTerms={titles ?? []}
+          onClick={onClick}
+        />
+      }
     </div>
   );
 };
