@@ -7,7 +7,6 @@ interface RelativeSearchTermsProps {
 }
 
 const RelativeSearchTerms = ({ style, searchTerms, onClick }: RelativeSearchTermsProps) => {
-  // console.log(onClick);
   return (
     <>
       {searchTerms.length !== 0 && (
@@ -19,7 +18,6 @@ const RelativeSearchTerms = ({ style, searchTerms, onClick }: RelativeSearchTerm
           {searchTerms.map((search, index) => (
             <button
               onClick={(event) => {
-                console.log('클릭');
                 onClick(event, search);
               }}
               className="w-full px-2 py-2 hover:bg-primary-50 rounded-lg cursor-pointer text-left font-pretendard text-base font-normal text-grayscale-800"

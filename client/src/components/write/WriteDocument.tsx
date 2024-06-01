@@ -163,13 +163,12 @@ const WriteDocument = ({ mode, writeDocument, isPending, defaultDocumentData }: 
       <PostHeader mode={mode} onClickSubmit={onClickSubmit} isPending={isPending} disabledSubmit={disabledSubmit} />
       <TitleInputField titleState={titleState} nicknameState={nicknameState} disabled={mode === 'edit'} />
       <PostContents editorRef={editorRef} initialValue={initialValue} setImages={setImages} />
-      {
-        <RelativeSearchTerms
-          style={{ top: `${floatingAreaPosition.top + 200}px`, left: floatingAreaPosition.left, width: 320 }}
-          searchTerms={titles ?? []}
-          onClick={onClick}
-        />
-      }
+
+      <RelativeSearchTerms
+        style={{ top: `${floatingAreaPosition.top + 200}px`, left: floatingAreaPosition.left, width: 320 }}
+        searchTerms={titles ?? []}
+        onClick={onClick}
+      />
     </div>
   );
 };
