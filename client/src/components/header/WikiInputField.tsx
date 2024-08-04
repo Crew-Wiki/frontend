@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { ReactComponent as SearchCircle } from '@assets/image/search-circle-secondary.svg';
+import React from 'react';
+import SearchCircle from '@assets/image/search-circle-secondary.svg';
 import useInput from '@hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import URLS from '@constants/urls';
 import { twMerge } from 'tailwind-merge';
-import useGetDocumentSearch from '@api/get/useGetDocumentSearch';
-import useDebounce from '@hooks/useDebounce';
+import useSearchDocumentByQuery from '@hooks/useSearchDocumentByQuery';
 import RelativeSearchTerms from './RelativeSearchTerms';
 
 interface WikiInputProps {
@@ -18,16 +17,7 @@ const WikiInputField = ({ id, className, handleSubmit }: WikiInputProps) => {
   const [value, setValue] = useInput<string>('');
   const navigate = useNavigate();
 
-  const { titles, searchDocuments } = useGetDocumentSearch(value);
-  const searchDocumentsIfValid = () => {
-    if (value.trim() !== '' && /^[가-힣()0-9]*$/.test(value)) searchDocuments();
-  };
-
-  const debouncedSearchDocuments = useDebounce(searchDocumentsIfValid, 200);
-
-  useEffect(() => {
-    debouncedSearchDocuments();
-  }, [value]);
+  const { titles } = useSearchDocumentByQuery(value);
 
   const onSubmit = (event: React.FormEvent, search?: string) => {
     event.preventDefault();
@@ -61,9 +51,9 @@ const WikiInputField = ({ id, className, handleSubmit }: WikiInputProps) => {
         onChange={setValue}
       />
       <button>
-        <SearchCircle className="cursor-pointer max-[768px]:hidden" />
+        <img className="cursor-pointer max-[768px]:hidden" src={SearchCircle} alt="search" />
       </button>
-      {value.trim() !== '' && <RelativeSearchTerms searchTerms={titles ?? []} onSubmit={onSubmit} />}
+      {value.trim() !== '' && <RelativeSearchTerms searchTerms={titles ?? []} onClick={onSubmit} />}
     </form>
   );
 };

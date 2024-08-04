@@ -1,13 +1,12 @@
 diff --git a/node_modules/tailwindcss/lib/css/preflight.css b/node_modules/tailwindcss/lib/css/preflight.css
-index 3e4fa06..96482d3 100644
+index 7a0d82d..6cc72d2 100644
 --- a/node_modules/tailwindcss/lib/css/preflight.css
 +++ b/node_modules/tailwindcss/lib/css/preflight.css
-@@ -200,7 +200,7 @@ button,
- [type='submit'] {
+@@ -201,7 +201,6 @@ input:where([type='reset']),
+ input:where([type='submit']) {
    -webkit-appearance: button; /* 1 */
    background-color: transparent; /* 2 */
 -  background-image: none; /* 2 */
-+  /* background-image: none; */
  }
  
  /*
